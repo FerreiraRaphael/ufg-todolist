@@ -5,11 +5,9 @@ node_js:
 
 build:
   ci:
-    # Install Webapp dependencies
-    - cd webapp
-    - yarn
+    # Install dependencies
+    - yarn && cd webapp && yarn
     # Test Webapp
     - yarn test -- --coverage
     # Test Api
-    - cd ..
-    - yarn test:coverage
+    - cd .. && yarn test:coverage
