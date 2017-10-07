@@ -4,11 +4,12 @@ node_js:
   - 7.4.0
 
 env:
-  - NODE_ENV : development
-  - PORT : 4040
-  - JWT_SECRET : 0a6b944d-d2fb-46fc-a85e-0295c986cd9f
-  - MONGO_HOST : mongodb://ufg:ufg123456@ds111895.mlab.com:11895/ufg-todolist
-  - MONGO_PORT : 11895
+ global:
+  - NODE_ENV=development
+  - PORT=4040
+  - JWT_SECRET=0a6b944d-d2fb-46fc-a85e-0295c986cd9f
+  - MONGO_HOST=mongodb://ufg:ufg123456@ds111895.mlab.com:11895/ufg-todolist
+  - MONGO_PORT=11895
 
 build:
   ci:
