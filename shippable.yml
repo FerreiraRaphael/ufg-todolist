@@ -1,0 +1,15 @@
+language: node_js
+
+node_js:
+  - 7.4.0
+
+build:
+  ci:
+    # Install Webapp dependencies
+    - cd webapp
+    - yarn
+    # Test Webapp
+    - yarn test -- --coverage
+    # Test Api
+    - cd ..
+    - yarn test:coverage
