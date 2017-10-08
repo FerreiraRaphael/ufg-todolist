@@ -24,10 +24,9 @@ build:
     - yarn && cd webapp && yarn
     # Test Webapp
     - yarn test:coverage:ci
-    - mv $API_TEST_RESULTS $TEST_RESULTS_DIR/api-testresults.xml
-    - mv $API_COVERAGE_RESULTS $CODE_COVERAGE_DIR/api-testresults.xml
-    # Test Api
-    - cd .. && yarn test:coverage:ci
     - mv $WEBAPP_TEST_RESULTS $TEST_RESULTS_DIR/webapp-testresults.xml
     - mv $WEBAPP_COVERAGE_RESULT $CODE_COVERAGE_DIR/webapp-coverageresult.xml
-
+    # Test Api
+    - cd .. && yarn test:coverage:ci
+    - mv $API_TEST_RESULTS $TEST_RESULTS_DIR/api-testresults.xml
+    - mv $API_COVERAGE_RESULTS $CODE_COVERAGE_DIR/api-testresults.xml
