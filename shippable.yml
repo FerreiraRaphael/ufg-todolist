@@ -5,17 +5,29 @@ node_js:
 
 env:
  global:
+  - WEBAPP_DIR=$SHIPPABLE_REPO_DIR/webapp
+  - TEST_RESULTS_DIR=$SHIPPABLE_REPO_DIR/shippable/testresults
+  - CODE_COVERAGE_DIR=$SHIPPABLE_REPO_DIR/shippable/codecoverage
   - NODE_ENV=development
   - PORT=4040
   - JWT_SECRET=0a6b944d-d2fb-46fc-a85e-0295c986cd9f
   - MONGO_HOST=mongodb://ufg:ufg123456@ds111895.mlab.com:11895/ufg-todolist
   - MONGO_PORT=11895
+  - API_TEST_RESULTS=$SHIPPABLE_REPO_DIR/test-results.xml
+  - API_COVERAGE_RESULTS=$SHIPPABLE_REPO_DIR/coverage/clover.xml
+  - WEBAPP_TEST_RESULTS=$WEBAPP_DIR/junit.xml
+  - WEBAPP_COVERAGE_RESULT=$WEBAPP_DIR/coverage/clover.xml
 
 build:
   ci:
     # Install dependencies
     - yarn && cd webapp && yarn
     # Test Webapp
-    - yarn test -- --coverage
+    - yarn test:coverage:ci
+    - mv $API_TEST_RESULTS $TEST_RESULTS_DIR/api-testresults.xml
+    - mv $API_COVERAGE_RESULTS $CODE_COVERAGE_DIR/api-testresults.xml
     # Test Api
-    - cd .. && yarn test:coverage
+    - cd .. && yarn test:coverage:ci
+    - mv $WEBAPP_TEST_RESULTS $TEST_RESULTS_DIR/webapp-testresults.xml
+    - mv $WEBAPP_COVERAGE_RESULT $CODE_COVERAGE_DIR/webapp-coverageresult.xml
+

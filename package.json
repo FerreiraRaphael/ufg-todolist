@@ -18,10 +18,12 @@
     "lint:watch": "yarn lint -- --watch",
     "precommit": "yarn lint && yarn test",
     "test": "cross-env NODE_ENV=test ./node_modules/.bin/mocha --ui bdd --reporter spec --colors --compilers js:babel-core/register server/tests --recursive",
+    "test:ci": "cross-env NODE_ENV=test ./node_modules/.bin/mocha --ui bdd -R mocha-junit-reporter --colors --compilers js:babel-core/register server/tests --recursive",
     "test:watch": "yarn test -- --watch",
     "test:coverage": "cross-env NODE_ENV=test node_modules/.bin/nyc --require babel-core/register ./node_modules/.bin/mocha server/tests",
+    "test:coverage:ci": "cross-env NODE_ENV=test node_modules/.bin/nyc --require babel-core/register ./node_modules/.bin/mocha -R mocha-junit-reporter server/tests && yarn report-coverage",
     "test:check-coverage": "yarn test:coverage && nyc check-coverage",
-    "report-coverage": "coveralls < ./coverage/lcov.info"
+    "report-coverage": "nyc report --reporter=clover"
   },
   "repository": {
     "type": "git",
@@ -85,7 +87,9 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-util": "^3.0.7",
     "husky": "^0.13.1",
+    "istanbul": "false0.4.5",
     "mocha": "3.2.0",
+    "mocha-junit-reporter": "false1.15.0",
     "nyc": "false11.2.1",
     "run-sequence": "^1.1.5",
     "supertest": "2.0.1",

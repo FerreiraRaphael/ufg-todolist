@@ -50,3 +50,6 @@ node_modules
 
 # .env
 .env
+
+#.xml - test reports in xml
+**/*.xml

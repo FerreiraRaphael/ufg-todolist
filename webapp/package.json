@@ -11,6 +11,12 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "test:ci": "yarn test --testResultsProcessor ./node_modules/jest-junit",
+    "test:coverage": "yarn test --coverage",
+    "test:coverage:ci": "yarn test:ci --coverage"
+  },
+  "devDependencies": {
+    "jest-junit": "false3.1.0",
+    "jest-junit-reporter": "false1.1.0"
   }
 }
