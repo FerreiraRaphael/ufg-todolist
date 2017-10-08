@@ -23,11 +23,11 @@ build:
     # Install dependencies
     - yarn && cd webapp && yarn
     # Test Webapp
-    - yarn test:ci
-    - yarn test:coverage:ci
-    - ls
-    - mv $WEBAPP_TEST_RESULTS $TEST_RESULTS_DIR/webapp-testresults.xml
-    - mv $WEBAPP_COVERAGE_RESULT $CODE_COVERAGE_DIR/webapp-coverageresult.xml
+    #- yarn test:ci
+    #- yarn test:coverage:ci
+    #- ls
+    #- mv $WEBAPP_TEST_RESULTS $TEST_RESULTS_DIR/webapp-testresults.xml
+    #- mv $WEBAPP_COVERAGE_RESULT $CODE_COVERAGE_DIR/webapp-coverageresult.xml
     # Test Api
     - cd .. && yarn test:ci
     - yarn test:coverage:ci
