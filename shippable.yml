@@ -33,7 +33,7 @@ build:
     # Test Api
     - cd ..
     - yarn test:ci
-    - $API_MOD_LOC/cross-env NODE_ENV=test $API_MOD_LOC/istanbul --include-all-sources cover -root "$SHIPPABLE_REPO_DIR/server" ./node_modules/mocha/bin/_mocha -- --compilers js:babel-core/register -R  spec-xunit-file --recursive "$SHIPPABLE_REPO_DIR/server/tests/"
-    - $API_MOD_LOC/istanbul report
+    - $API_MOD_LOC/cross-env NODE_ENV=test $API_MOD_LOC/nyc --include-all-sources cover -root "$SHIPPABLE_REPO_DIR/server" ./node_modules/mocha/bin/_mocha -- --compilers js:babel-core/register -R  spec-xunit-file --recursive "$SHIPPABLE_REPO_DIR/server/tests/"
+    - $API_MOD_LOC/nyc report --reporter=clover
     - mv $API_TEST_RESULTS $TEST_RESULTS_DIR/api-testresults.xml
     - mv $API_COVERAGE_RESULTS $CODE_COVERAGE_DIR/api-coverageresult.xml
