@@ -17,21 +17,22 @@ env:
   - API_COVERAGE_RESULTS=$SHIPPABLE_REPO_DIR/coverage/clover.xml
   - WEBAPP_TEST_RESULTS=$WEBAPP_DIR/junit.xml
   - WEBAPP_COVERAGE_RESULT=$WEBAPP_DIR/coverage/clover.xml
-  - MOD_LOC=$SHIPPABLE_REPO_DIR/node_modules/.bin/
+  - API_MOD_LOC=$SHIPPABLE_REPO_DIR/node_modules/.bin
+  - WEBAPP_MOD_LOC=$WEBAPP_DIR/node_modules/.bin
 
 build:
   ci:
     # Install dependencies
     - yarn && cd webapp && yarn
     # Test Webapp
-    #- yarn test:ci
+    - $WEBAPP_MOD_LOC/react-scripts test --env=jsdom --testResultsProcessor .$WEBAPP_DIR/node_modules/jest-junit
     #- yarn test:coverage:ci
-    #- ls
-    #- mv $WEBAPP_TEST_RESULTS $TEST_RESULTS_DIR/webapp-testresults.xml
-    #- mv $WEBAPP_COVERAGE_RESULT $CODE_COVERAGE_DIR/webapp-coverageresult.xml
+    - ls
+    - mv $WEBAPP_TEST_RESULTS $TEST_RESULTS_DIR/webapp-testresults.xml
+    - mv $WEBAPP_COVERAGE_RESULT $CODE_COVERAGE_DIR/webapp-coverageresult.xml
     # Test Api
     - cd ..
     - yarn test:ci
-    - ./node_modules/.bin/cross-env NODE_ENV=test ./node_modules/.bin/istanbul --include-all-sources cover -root "server" ./node_modules/mocha/bin/_mocha -- --compilers js:babel-core/register -R  spec-xunit-file --recursive ./server/tests/
-    - ./node_modules/.bin/istanbul report cobertura --dir $CODE_COVERAGE_DIR
+    - $API_MOD_LOC/cross-env NODE_ENV=test $API_MOD_LOC/istanbul --include-all-sources cover -root "server" ./node_modules/mocha/bin/_mocha -- --compilers js:babel-core/register -R  spec-xunit-file --recursive ./server/tests/
+    - $API_MOD_LOC/istanbul report cobertura --dir $CODE_COVERAGE_DIR
     - mv $API_TEST_RESULTS $TEST_RESULTS_DIR/api-testresults.xml
