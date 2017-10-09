@@ -21,9 +21,9 @@
     "test:ci": "cross-env NODE_ENV=test ./node_modules/.bin/mocha --ui bdd -R mocha-junit-reporter --colors --compilers js:babel-core/register server/tests --recursive",
     "test:watch": "yarn test -- --watch",
     "test:coverage": "cross-env NODE_ENV=test node_modules/.bin/nyc --require babel-core/register ./node_modules/.bin/mocha server/tests",
-    "test:coverage:ci": "cross-env NODE_ENV=test node_modules/.bin/nyc --require babel-core/register ./node_modules/.bin/mocha -R mocha-junit-reporter server/tests && yarn report-coverage",
+    "test:coverage:ci": "cross-env NODE_ENV=test node_modules/.bin/nyc --include-all-sources --root 'server' --require babel-core/register ./node_modules/.bin/mocha -R spec-xunit-file server/tests && yarn report-coverage",
     "test:check-coverage": "yarn test:coverage && nyc check-coverage",
-    "report-coverage": "nyc report --reporter=clover"
+    "report-coverage": "nyc report cobertura"
   },
   "repository": {
     "type": "git",
@@ -92,6 +92,7 @@
     "mocha-junit-reporter": "false1.15.0",
     "nyc": "false11.2.1",
     "run-sequence": "^1.1.5",
+    "spec-xunit-file": "false0.0.1-3",
     "supertest": "2.0.1",
     "supertest-as-promised": "4.0.2",
     "validate-commit-msg": "^2.6.1"
