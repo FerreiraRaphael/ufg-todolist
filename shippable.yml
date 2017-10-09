@@ -23,11 +23,11 @@ env:
 build:
   ci:
     # Install dependencies
-    - yarn && cd webapp && yarn
+    - shippable_retry yarn && cd webapp && shippable_retry yarn
     # Test Webapp
-    - $WEBAPP_MOD_LOC/react-scripts test --env=jsdom --testResultsProcessor .$WEBAPP_DIR/node_modules/jest-junit
+    - $WEBAPP_MOD_LOC/react-scripts test --env=jsdom --testResultsProcessor .$WEBAPP_DIR/node_modules/jest-junit --coverage
     #- yarn test:coverage:ci
-    - ls
+    - ls && cd .. && ls && cd webapp
     - mv $WEBAPP_TEST_RESULTS $TEST_RESULTS_DIR/webapp-testresults.xml
     - mv $WEBAPP_COVERAGE_RESULT $CODE_COVERAGE_DIR/webapp-coverageresult.xml
     # Test Api
