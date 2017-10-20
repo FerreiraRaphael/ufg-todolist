@@ -20,8 +20,8 @@
     "test": "cross-env NODE_ENV=test ./node_modules/.bin/mocha --ui bdd --reporter spec --colors --compilers js:babel-core/register server/tests --recursive",
     "test:ci": "cross-env NODE_ENV=test ./node_modules/.bin/mocha --ui bdd -R mocha-junit-reporter --colors --compilers js:babel-core/register server/tests --recursive",
     "test:watch": "yarn test -- --watch",
-    "test:coverage": "cross-env NODE_ENV=test node_modules/.bin/nyc --require babel-core/register ./node_modules/.bin/mocha server/tests",
-    "test:coverage:ci": "cross-env NODE_ENV=test node_modules/.bin/nyc --include-all-sources --root 'server' --require babel-core/register ./node_modules/.bin/mocha -R spec-xunit-file server/tests && yarn report-coverage",
+    "test:coverage": "nyc --reporter=clover yarn test",
+    "test:coverage:ci": "nyc --reporter=clover yarn test:ci",
     "test:check-coverage": "yarn test:coverage && nyc check-coverage",
     "report-coverage": "nyc report cobertura"
   },

@@ -11,7 +11,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "test:ci": "yarn test --testResultsProcessor ./node_modules/jest-junit",
+    "test:ci": "yarn test --testResultsProcessor jest-junit",
     "test:coverage": "yarn test --coverage",
     "test:coverage:ci": "yarn test:ci --coverage"
   },
