@@ -29,6 +29,8 @@ build:
     - mv $WEBAPP_TEST_RESULTS $TEST_RESULTS_DIR/webapp-testresults.xml
     - mv $WEBAPP_COVERAGE_RESULT $CODE_COVERAGE_DIR/webapp-coverageresult.xml
     - ls $CODE_COVERAGE_DIR/ && ls $TEST_RESULTS_DIR/
+    - cat $CODE_COVERAGE_DIR/webapp-coverageresult.xml
+    - popd
     # Test Api
     # - cd ..
     # - yarn test:coverage:ci
