@@ -33,18 +33,16 @@ describe("Route /list", function() {
         await List.create({ title, UserId: user2.id });
       });
     });
-    it("fetchs the user lists", function(done) {
-      request(app)
+    it("fetchs the user lists", async () => {
+      const res = await request(app)
         .get(`/api/user/${user.id}/list`)
         .set("Accept", /application\/json/)
         .set("Authorization", `Bearer ${authResponse.body.token}`)
         .set("UserId", authResponse.body.user.id)
         .send({ title: "list test" })
-        .expect(200)
-        .end((err, res) => {
-          expect(res.body.length).to.be(3);
-          done();
-        });
+        .expect(200);
+
+      expect(res.body.length).to.be(3);
     });
   });
 
@@ -65,10 +63,10 @@ describe("Route /list", function() {
   describe("PUT /user/:userId/list/:ListId", () => {
     let list;
     beforeEach(async function createList() {
-      list = await List.create({title: "teste", UserId: user.id});
+      list = await List.create({ title: "teste", UserId: user.id });
     });
     it("updates a list", async () => {
-      const updateData = { title: "teste 2"};
+      const updateData = { title: "teste 2" };
       await request(app)
         .put(`/api/user/${user.id}/list/${list.id}`)
         .set("Accept", /application\/json/)
@@ -76,7 +74,7 @@ describe("Route /list", function() {
         .set("UserId", authResponse.body.user.id)
         .send(updateData)
         .expect(200);
-      const updatedList = await List.find({where: {id: list.id}});
+      const updatedList = await List.find({ where: { id: list.id } });
       expect(updateData.title).to.be(updateData.title);
     });
   });
@@ -84,7 +82,7 @@ describe("Route /list", function() {
   describe("DELETE /user/:userId/list/:ListId", () => {
     let list;
     beforeEach(async function createList() {
-      list = await List.create({title: "teste", UserId: user.id});
+      list = await List.create({ title: "teste", UserId: user.id });
     });
     it("creates a list", async () => {
       await request(app)
