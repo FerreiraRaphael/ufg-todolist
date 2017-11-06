@@ -1,1 +1,1 @@
-web: npm run migrate && npm start
+web: cp config/config.example.json config/config.json && npm run migrate && npm start
