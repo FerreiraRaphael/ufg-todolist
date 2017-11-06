@@ -5,6 +5,7 @@
   "scripts": {
     "start": "cross-env DEBUG=express-sequelize node ./bin/www",
     "dev": "cross-env DEBUG=express-sequelize node --inspect ./bin/www",
+    "migrate": "sequelize db:migrate",
     "test": "cross-env NODE_ENV=test mocha routes/*.spec.js",
     "test:debug": "cross-env NODE_ENV=test mocha debug routes/*.spec.js",
     "test:coverage": "cross-env NODE_ENV=test istanbul --config=config/istanbul.yml cover node_modules/mocha/bin/_mocha -- -R spec routes/*.spec.js",
