@@ -30,7 +30,7 @@ build:
     # npm mirrors can sometimes be flacky, better to use shippable_retry
     # http://docs.shippable.com/ci/advancedOptions/retry/
     - psql -c 'CREATE USER username SUPERUSER INHERIT CREATEDB CREATEROLE;' -U postgres
-    - psql -c 'ALTER USER username PASSWORD 'password';' -U postgres
+    - psql -c 'ALTER USER username PASSWORD "password";' -U postgres
     - nvm install 8.4.0
     - nvm use 8.4.0
     - shippable_retry npm install
