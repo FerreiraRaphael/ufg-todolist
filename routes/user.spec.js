@@ -14,8 +14,7 @@ describe("Route /user", function() {
   beforeEach(function() {
     return Bluebird.all([
       User.destroy({
-        where: {},
-        truncate: true
+        where: {}
       })
     ]);
   });

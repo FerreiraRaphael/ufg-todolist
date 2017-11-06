@@ -14,8 +14,7 @@ describe("Route /list", function() {
   beforeEach(function() {
     return Bluebird.all([
       User.destroy({
-        where: {},
-        truncate: true
+        where: {}
       })
     ]);
   });
@@ -45,7 +44,6 @@ describe("Route /list", function() {
         .send({ title: "list test" })
         .expect(200)
         .end((err, res) => {
-          console.log(res.body);
           expect(res.body.length).to.be(3);
           done()
         });
