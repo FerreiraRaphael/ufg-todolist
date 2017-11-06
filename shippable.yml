@@ -34,7 +34,8 @@ build:
     - nvm install 8.4.0
     - nvm use 8.4.0
     - shippable_retry npm install
-    - $MOD_LOC/sequelize --env test db:create && - $MOD_LOC/sequelize --env test db:migrate
+    - $MOD_LOC/sequelize --env test db:create
+    - $MOD_LOC/sequelize --env test db:migrate
     - mkdir -p $TEST_RESULTS_DIR && mkdir -p $CODE_COVERAGE_DIR
     - pushd $TESTS_LOC_DIR
     - $MOD_LOC/mocha --recursive "$TESTS_LOC_DIR/*.spec.js" -R mocha-junit-reporter --reporter-options mochaFile=$TEST_RESULTS_DIR/testresults.xml
