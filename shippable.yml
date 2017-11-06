@@ -12,7 +12,7 @@ services:
 branches:
   only:
     - master
-    - development
+    - develop
     - feature/*
 
 # using pre-defined build variables
