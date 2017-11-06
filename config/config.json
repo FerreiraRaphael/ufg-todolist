@@ -1,0 +1,24 @@
+{
+  "development": {
+    "username": "raphael",
+    "password": "l524l34gp27Q!",
+    "database": "ufgtodo_development",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "raphael",
+    "password": "l524l34gp27Q!",
+    "database": "ufgtodo_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "logging": true
+  },
+  "production": {
+    "username": "raphael",
+    "password": "l524l34gp27Q!",
+    "database": "weedie_production",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
