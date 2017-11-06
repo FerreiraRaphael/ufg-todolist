@@ -1,3 +1,1 @@
---recursive "$TESTS_LOC_DIR/*.spec.js" 
 --reporter mocha-junit-reporter 
---reporter-options mochaFile=$TEST_RESULTS_DIR/testresults.xml
