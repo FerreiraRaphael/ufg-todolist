@@ -1,0 +1,6 @@
+instrumentation:
+  root: .
+  exclude: ["*.spec.js"]
+reporting:
+  reports:
+    - html
