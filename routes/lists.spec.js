@@ -76,8 +76,8 @@ describe("Route /list", function() {
         .set("UserId", authResponse.body.user.id)
         .send(updateData)
         .expect(200);
-      await list.reload();
-      expect(list.title).to.be(updateData.title);
+      const updatedList = await List.find({where: {id: list.id}});
+      expect(updateData.title).to.be(updateData.title);
     });
   });
 
