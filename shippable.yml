@@ -2,7 +2,7 @@
 language: node_js
 
 node_js:
-  - 7.4.0
+  - 8
 
 # use this to control what branches get built.
 # http://docs.shippable.com/ci/advancedOptions/branches/
