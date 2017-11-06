@@ -5,14 +5,10 @@
   "scripts": {
     "start": "cross-env DEBUG=express-sequelize node ./bin/www",
     "dev": "cross-env DEBUG=express-sequelize node --inspect ./bin/www",
-    "test":
-      "cross-env NODE_ENV=test mocha routes/*.spec.js",
-    "test:debug":
-      "cross-env NODE_ENV=test mocha debug routes/*.spec.js",
-    "test:ci":
-      "cross-env NODE_ENV=test mocha routes/*.spec.js -R mocha-junit-reporter",
-    "test:coverage": "cross-env NODE_ENV=test node_modules/.bin/istanbul cover --report html node_modules/mocha/bin/_mocha -- -R spec routes/*.spec.js",
-    "test:coverage:ci": "cross-env NODE_ENV=test istanbul cover node_modules/mocha/bin/_mocha -- -R spec-xunit-file --recursive routes/*.spec.js",
+    "test": "cross-env NODE_ENV=test mocha routes/*.spec.js",
+    "test:debug": "cross-env NODE_ENV=test mocha debug routes/*.spec.js",
+    "test:coverage":
+      "cross-env NODE_ENV=test node_modules/.bin/istanbul cover -x *.spec.js --report html node_modules/mocha/bin/_mocha -- -R spec routes/*.spec.js",
     "report:coverage": "cross-env NODE_ENV=test istanbul report cobertura"
   },
   "dependencies": {

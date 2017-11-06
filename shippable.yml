@@ -40,9 +40,9 @@ build:
     - $MOD_LOC/sequelize --env test db:migrate
     - mkdir -p $TEST_RESULTS_DIR && mkdir -p $CODE_COVERAGE_DIR
     - pushd $TESTS_LOC_DIR
-    - npm run test:ci --reporter-options mochaFile=$TEST_RESULTS_DIR/testresults.xml
-    - npm run test:coverage:ci
-    - npm run report:coverage --dir $CODE_COVERAGE_DIR
+    - $MOD_LOC/cross-env NODE_ENV=test $MOD_LOC/mocha --recursive "$TESTS_LOC_DIR/*.spec.js" -R mocha-junit-reporter --reporter-options mochaFile=$TEST_RESULTS_DIR/testresults.xml 
+    - $MOD_LOC/cross-env NODE_ENV=test $MOD_LOC/istanbul cover -x *.spec.js $SHIPPABLE_REPO_DIR/node_modules/mocha/bin/_mocha -- -R spec-xunit-file --recursive "$TESTS_LOC_DIR/*.spec.js" 
+    - $MOD_LOC/cross-env NODE_ENV=test $MOD_LOC/istanbul report cobertura --dir $CODE_COVERAGE_DIR 
     - popd
 
 
