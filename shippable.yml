@@ -34,8 +34,6 @@ build:
     # http://docs.shippable.com/ci/advancedOptions/retry/
     - psql -c "CREATE USER username SUPERUSER INHERIT CREATEDB CREATEROLE;" -U postgres
     - psql -c "ALTER USER username PASSWORD 'password';" -U postgres
-    - nvm install 8.4.0
-    - nvm use 8.4.0
     - shippable_retry npm install
     - mv $CONFIG_LOC/config.example.json $CONFIG_LOC/config.json
     - $MOD_LOC/sequelize --env test db:create
