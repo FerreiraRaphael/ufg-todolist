@@ -11,31 +11,29 @@ describe("Route /list", function() {
   before(function() {
     return models.sequelize.sync();
   });
-  beforeEach(function() {
-    return Bluebird.all([
-      User.destroy({
-        where: {}
-      })
-    ]);
+  let user, authResponse;
+  beforeEach(async function createAndAuthUser() {
+    await User.destroy({ where: {} });
+    await List.destroy({ where: {} });
+    const data = {
+      username: "teste",
+      password: "teste"
+    };
+    user = await User.create(data);
+    authResponse = await login(app, data);
   });
 
   describe("GET /user/:userId/list", () => {
-    let user, user2, authResponse;
-    beforeEach(async function createAndAuthUser() {
-      const data = {
-        username: "teste",
-        password: "teste"
-      };
+    let user2;
+    beforeEach(async function createListsForTwoUsers() {
       const lists = ["list 1", "list 2", "list 3"];
-      user = await User.create(data);
-      user2 = await User.create({ ...data, username: "teste 2" });
-      authResponse = await login(app, data);
+      user2 = await User.create({ password: "teste", username: "teste 2" });
       lists.forEach(async title => {
         await List.create({ title, UserId: user.id });
         await List.create({ title, UserId: user2.id });
       });
     });
-    it("fetchs the user lists", function (done) {
+    it("fetchs the user lists", function(done) {
       request(app)
         .get(`/api/user/${user.id}/list`)
         .set("Accept", /application\/json/)
@@ -45,21 +43,12 @@ describe("Route /list", function() {
         .expect(200)
         .end((err, res) => {
           expect(res.body.length).to.be(3);
-          done()
+          done();
         });
     });
   });
 
   describe("POST /user/:userId/list", () => {
-    let user, authResponse;
-    beforeEach(async function createAndAuthUser() {
-      const data = {
-        username: "teste",
-        password: "teste"
-      };
-      user = await User.create(data);
-      authResponse = await login(app, data);
-    });
     it("creates a list", async () => {
       await request(app)
         .post(`/api/user/${user.id}/list`)
@@ -73,25 +62,40 @@ describe("Route /list", function() {
     });
   });
 
-  //   describe("DELETE /user", () => {
-  //     beforeEach(async function createAndAuthUser() {
-  //       const data = {
-  //         username: "teste",
-  //         password: "teste"
-  //       };
-  //       this.user = await User.create(data);
-  //       this.authResponse = await login(app, data);
-  //     });
-  //     it("deletes a autheticated user", async () => {
-  //       await request(app)
-  //         .delete(`/api/user/${this.user.id}`)
-  //         .set("Accept", /application\/json/)
-  //         .set("Authorization", `Bearer ${this.authResponse.body.token}`)
-  //         .set("UserId", this.authResponse.body.user.id)
-  //         .send()
-  //         .expect(200);
-  //       const count = await User.count();
-  //       expect(count).to.be(0);
-  //     });
-  //   });
+  describe("PUT /user/:userId/list/:ListId", () => {
+    let list;
+    beforeEach(async function createList() {
+      list = await List.create({title: "teste", UserId: user.id});
+    });
+    it("updates a list", async () => {
+      const updateData = { title: "teste 2"};
+      await request(app)
+        .put(`/api/user/${user.id}/list/${list.id}`)
+        .set("Accept", /application\/json/)
+        .set("Authorization", `Bearer ${authResponse.body.token}`)
+        .set("UserId", authResponse.body.user.id)
+        .send(updateData)
+        .expect(200);
+      await list.reload();
+      expect(list.title).to.be(updateData.title);
+    });
+  });
+
+  describe("DELETE /user/:userId/list/:ListId", () => {
+    let list;
+    beforeEach(async function createList() {
+      list = await List.create({title: "teste", UserId: user.id});
+    });
+    it("creates a list", async () => {
+      await request(app)
+        .delete(`/api/user/${user.id}/list/${list.id}`)
+        .set("Accept", /application\/json/)
+        .set("Authorization", `Bearer ${authResponse.body.token}`)
+        .set("UserId", authResponse.body.user.id)
+        .send()
+        .expect(200);
+      const count = (await user.getLists()).length;
+      expect(count).to.be(0);
+    });
+  });
 });
