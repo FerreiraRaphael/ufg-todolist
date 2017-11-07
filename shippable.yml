@@ -49,7 +49,7 @@ build:
         --report lcovonly
         -x *.spec.js
         --dir $CODE_COVERAGE_DIR
-        --root $SHIPPABLE_REPO_DIR
+        --root .
         --
         -R spec --recursive $TESTS_LOC_DIR/*.spec.js &&
         cat $CODE_COVERAGE_DIR/lcov.info | $MOD_LOC/codacy-coverage
