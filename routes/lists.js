@@ -11,17 +11,17 @@ router
     async function fetchLists(req, res) {
       const lists = await List.findAll({
         where: { ...req.params },
-        include: [Task],
+        include: [Task]
       });
       res.json(lists);
-    },
+    }
   ])
   .post([
     ...authMiddlaware,
     isCurrentUserMiddlaware,
     async function createList(req, res) {
       res.json(await List.create({ ...req.body, ...req.params }));
-    },
+    }
   ]);
 
 router
@@ -32,16 +32,16 @@ router
     async function fetchList(req, res) {
       const id = req.params.ListId;
       res.json(await List.find({ where: { id }, include: [Task] }));
-    },
+    }
   ])
   .put([
     ...authMiddlaware,
     isCurrentUserMiddlaware,
     async function updateList(req, res) {
       const id = req.params.ListId;
-      const result = List.update(req.body, { where: { id } });
+      const result = await List.update(req.body, { where: { id } });
       res.json(result);
-    },
+    }
   ])
   .delete([
     ...authMiddlaware,
@@ -50,7 +50,7 @@ router
       const id = req.params.ListId;
       const result = await List.destroy({ where: { id } });
       res.json(result);
-    },
+    }
   ]);
 
 router.use('/:ListId/task', taskRoutes);

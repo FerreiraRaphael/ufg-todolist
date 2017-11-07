@@ -18,7 +18,9 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 // app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use(logger('dev'));
+if (process.env.NODE_ENV !== 'test') {
+  app.use(logger('dev'));
+}
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -36,29 +38,32 @@ app.use((req, res, next) => {
 
 // error handler
 // no stacktraces leaked to user unless in development environment
-app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.json({
     message: err.message,
-    error: app.get('env') === 'development' ? err : {},
+    error: app.get('env') === 'development' ? err : {}
   });
 });
 
-passport.use(new BearerStrategy({ passReqToCallback: true }, async (req, token, done) => {
-  const id = req.headers.userid;
-  try {
-    const { lastLogout } = await User.find({ where: { id } });
-    const user = await jwt.verify(
-      token,
-      `${process.env.APP_SECRET || 'development'} ${lastLogout}`,
-    );
-    if (!user) {
-      return done(null, { error: 'Não foi possível autenticar' });
+passport.use(
+  new BearerStrategy({ passReqToCallback: true }, async (req, token, done) => {
+    const id = req.headers.userid;
+    try {
+      const { lastLogout } = await User.find({ where: { id } });
+      const user = await jwt.verify(
+        token,
+        `${process.env.APP_SECRET || 'development'} ${lastLogout}`
+      );
+      if (!user) {
+        return done(null, { error: 'Não foi possível autenticar' });
+      }
+      return done(null, user);
+    } catch (e) {
+      return done(null, { error: e.message });
     }
-    return done(null, user);
-  } catch (e) {
-    return done(null, { error: e.message });
-  }
-}));
+  })
+);
 
 module.exports = app;

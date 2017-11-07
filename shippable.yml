@@ -19,6 +19,7 @@ branches:
 # full list http://docs.shippable.com/ci/advancedOptions/environmentVariables/
 env:
   global:
+    - NODE_ENV=test
     - SHIPPABLE_POSTGRES_VERSION="9.6"
     - TEST_RESULTS_DIR=$SHIPPABLE_REPO_DIR/shippable/testresults
     - CODE_COVERAGE_DIR=$SHIPPABLE_REPO_DIR/shippable/codecoverage
@@ -27,6 +28,7 @@ env:
     - CONFIG_LOC=$SHIPPABLE_REPO_DIR/config
     - MOCHA_CONFIG=$CONFIG_LOC/mocha.ci.opts
     - ISTANBUL_CONFIG=$CONFIG_LOC/istanbul.ci.yml
+    - secure: oBwE1B6a3eLMwXO/6mrvLna8i+Q7HFQkHpNFvf2VslhYLlTsXHlpuYjLbPJvujvezLmIOTIC8uBDS/AO6O43Vt0laLpt3HB8/H8NPJ8dkXWOV4vvP3EIEg8RyugNTrEm8zwWpbcuGEpN6TQtfEJabf0RfS+U7UmR1sr5pncml4cHFRiV5eVZ6FEHMqlVu/LooD2EQrURkh1TySRN8u4XC9FyyAu3MX3+PbJ7q4XimetzVlgGOSru0VBkgwWD+GHabEtyWDurnpYjTkKBZvsy8N48JGWMeyNzTEoLBYCcs7TDvy/SyE2adTZVPjw+hOcm01tXPcAaXGfwwqOAfhU9rg==
 
 build:
 
@@ -40,17 +42,12 @@ build:
     - mv $CONFIG_LOC/config.example.json $CONFIG_LOC/config.json
     - $MOD_LOC/sequelize --env test db:create
     - $MOD_LOC/sequelize --env test db:migrate
-    - mkdir -p $TEST_RESULTS_DIR && mkdir -p $CODE_COVERAGE_DIR
+    - mkdir -p $TEST_RESULTS_DIR && mkdir -p $CODE_COVERAGE_DIR && mkdir -p $SHIPPABLE_REPO_DIR/coverage
     - pushd $TESTS_LOC_DIR
-    - $MOD_LOC/cross-env NODE_ENV=test $MOD_LOC/mocha 
-      --recursive "$TESTS_LOC_DIR/*.spec.js" 
-      --reporter mocha-junit-reporter 
-      --reporter-options mochaFile=$TEST_RESULTS_DIR/testresults.xml 
-    - $MOD_LOC/cross-env NODE_ENV=test $MOD_LOC/istanbul 
-      --config=$ISTANBUL_CONFIG cover $SHIPPABLE_REPO_DIR/node_modules/mocha/bin/_mocha -- 
-        --reporter spec-xunit-file 
-        --recursive "$TESTS_LOC_DIR/*.spec.js" 
-    - $MOD_LOC/cross-env NODE_ENV=test $MOD_LOC/istanbul report cobertura --dir $CODE_COVERAGE_DIR 
+    - npm run test:coverage
+    - npm run report:coverage -- --report-dir $CODE_COVERAGE_DIR --reporter lcovonly
+    - cat $CODE_COVERAGE_DIR/lcov.info | $MOD_LOC/codacy-coverage
+    - cat $CODE_COVERAGE_DIR/lcov.info
     - popd
 
 

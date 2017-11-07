@@ -10,7 +10,7 @@ module.exports = {
       })
     ];
   },
-  down(migration, Sequelize) {
+  down(migration) {
     return [
       migration.removeColumn('Users', 'password'),
       migration.removeColumn('Users', 'lastLogout')
