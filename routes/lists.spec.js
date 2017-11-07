@@ -65,7 +65,7 @@ describe('Route /list', () => {
     });
     it('updates a list', done => {
       const updateData = { title: 'teste 2' };
-            request(app)
+      request(app)
         .put(`/api/user/${user.id}/list/${list.id}`)
         .set(headers)
         .send(updateData)

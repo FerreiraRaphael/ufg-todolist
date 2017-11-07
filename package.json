@@ -56,10 +56,7 @@
     "supertest": "^2.0.0"
   },
   "lint-staged": {
-    "linters": {
-      "*.{json, css}": ["prettier --write", "git add"],
-      "*.{js, jsx}": ["eslint --fix", "prettier --write", "git add"]
-    }
+    "*.{js,json,css}": ["prettier --write", "git add"]
   },
   "prettier": {
     "singleQuote": true,
