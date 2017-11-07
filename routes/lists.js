@@ -6,9 +6,9 @@ const { authMiddlaware, isCurrentUserMiddlaware } = require('./middlawares');
 router
   .route('/')
   .get([
-    ...authMiddlaware,
-    isCurrentUserMiddlaware,
-    async function fetchLists(req, res) {
+...authMiddlaware,
+            isCurrentUserMiddlaware,
+            async function fetchLists(req, res) {
       const lists = await List.findAll({
         where: { ...req.params },
         include: [Task],
