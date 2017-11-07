@@ -1,8 +1,6 @@
-"use strict";
-
 module.exports = {
-  up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable("Tasks", {
+  up(queryInterface, Sequelize) {
+    return queryInterface.createTable('Tasks', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -18,26 +16,26 @@ module.exports = {
       updatedAt: Sequelize.DATE,
       ListId: {
         type: Sequelize.INTEGER,
-        onDelete: "CASCADE",
+        onDelete: 'CASCADE',
         allowNull: false,
         references: {
-          model: "Lists",
-          key: "id"
+          model: 'Lists',
+          key: 'id'
         }
       },
       UserId: {
         type: Sequelize.INTEGER,
-        onDelete: "CASCADE",
+        onDelete: 'CASCADE',
         allowNull: false,
         references: {
-          model: "Users",
-          key: "id"
+          model: 'Users',
+          key: 'id'
         }
       }
     });
   },
 
-  down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable("Tasks");
+  down(queryInterface, Sequelize) {
+    return queryInterface.dropTable('Tasks');
   }
 };

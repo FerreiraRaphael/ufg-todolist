@@ -1,16 +1,12 @@
-"use strict";
-
-module.exports = function(sequelize, DataTypes) {
-  var Task = sequelize.define("Task", {
+module.exports = (sequelize, DataTypes) => {
+  const Task = sequelize.define('Task', {
     title: DataTypes.STRING,
     done: DataTypes.BOOLEAN
   });
 
-  Task.associate = function({ List }) {
-    // Using additional options like CASCADE etc for demonstration
-    // Can also simply do Task.belongsTo(models.User);
+  Task.associate = ({ List }) => {
     Task.belongsTo(List, {
-      onDelete: "CASCADE",
+      onDelete: 'CASCADE',
       foreignKey: {
         allowNull: false
       }
