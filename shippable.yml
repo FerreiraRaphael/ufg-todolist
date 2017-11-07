@@ -44,14 +44,8 @@ build:
     - $MOD_LOC/sequelize --env test db:migrate
     - mkdir -p $TEST_RESULTS_DIR && mkdir -p $CODE_COVERAGE_DIR && mkdir -p $SHIPPABLE_REPO_DIR/coverage
     - pushd $TESTS_LOC_DIR
-    - $MOD_LOC/istanbul cover
-        $SHIPPABLE_REPO_DIR/node_modules/mocha/bin/_mocha
-        --report lcovonly
-        -x *.spec.js
-        --dir $CODE_COVERAGE_DIR
-        --root .
-        --
-        -R spec --recursive $TESTS_LOC_DIR/*.spec.js
+    - npm run test:coverage
+    - npm run report:coverage -- --report-dir $CODE_COVERAGE_DIR --reporter lcovonly
     - cat $CODE_COVERAGE_DIR/lcov.info | $MOD_LOC/codacy-coverage
     - cat $CODE_COVERAGE_DIR/lcov.info
     - popd

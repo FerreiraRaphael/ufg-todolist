@@ -12,9 +12,8 @@
     "lint": "eslint **/*.js",
     "test": "cross-env NODE_ENV=test mocha routes/*.spec.js",
     "test:debug": "cross-env NODE_ENV=test mocha debug routes/*.spec.js",
-    "test:coverage":
-      "cross-env NODE_ENV=test istanbul --config=config/istanbul.yml cover node_modules/mocha/bin/_mocha -- -R spec routes/*.spec.js",
-    "report:coverage": "cross-env NODE_ENV=test istanbul report cobertura",
+    "test:coverage": "cross-env NODE_ENV=test nyc npm run test && nyc report",
+    "report:coverage": "cross-env NODE_ENV=test nyc report",
     "precommit": "lint-staged"
   },
   "dependencies": {
@@ -52,11 +51,22 @@
     "istanbul": "^1.1.0-alpha.1",
     "lint-staged": "^4.3.0",
     "mocha": "^3.0.2",
+    "nyc": "^11.3.0",
     "prettier": "^1.7.4",
     "supertest": "^2.0.0"
   },
+  "nyc": {
+    "exclude": [
+      "**/*.spec.js",
+      "coverage",
+      "node_modules"
+    ]
+  },
   "lint-staged": {
-    "*.{js,json,css}": ["prettier --write", "git add"]
+    "*.{js,json,css}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "prettier": {
     "singleQuote": true,
