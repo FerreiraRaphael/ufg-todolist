@@ -1,59 +1,64 @@
-"use strict";
-const Bluebird = require("bluebird");
-const request = require("supertest");
-const expect = require("expect.js");
-const app = require("../app");
-const { login } = require("../test/helpers");
-const models = require("../models");
+const request = require('supertest');
+const expect = require('expect.js');
+const app = require('../app');
+const { login } = require('../test/helpers');
+const models = require('../models');
+
 const { User, List, Task } = models;
 
-describe("Route /task", function() {
-  before(function() {
-    return models.sequelize.sync();
-  });
-  let user, list, authResponse;
-  beforeEach(async function createAndAuthUser() {
+describe('Route /task', () => {
+  before(() => models.sequelize.sync());
+  let user;
+  let list;
+  let headers;
+  beforeEach(async () => {
     await User.destroy({ where: {} });
     const data = {
-      username: "teste",
-      password: "teste"
+      username: 'teste',
+      password: 'teste'
     };
     user = await User.create(data);
-    authResponse = await login(app, data);
+    const authResponse = await login(app, data);
+    headers = {};
+    headers.Accept = /application\/json/;
+    headers.Authorization = `Bearer ${authResponse.body.token}`;
+    headers.UserId = authResponse.body.user.id;
   });
-  beforeEach(async function createUserList() {
+  beforeEach(async () => {
     await List.destroy({ where: {} });
     await Task.destroy({ where: {} });
-    
-    list = await List.create({ UserId: user.id, title: "teste" });
+
+    list = await List.create({ UserId: user.id, title: 'teste' });
   });
 
-  describe("POST /user/:userId/list/:ListId/task", () => {
-    it("creates a task", async () => {
+  describe('POST /user/:userId/list/:ListId/task', () => {
+    it('creates a task', async () => {
       await request(app)
         .post(`/api/user/${user.id}/list/${list.id}/task`)
-        .set("Accept", /application\/json/)
-        .set("Authorization", `Bearer ${authResponse.body.token}`)
-        .set("UserId", authResponse.body.user.id)
-        .send({ title: "list test" })
+        .set(headers)
+        .send({ title: 'list test' })
         .expect(200);
       const count = (await list.getTasks()).length;
       expect(count).to.be(1);
     });
   });
-
-  describe("PUT /user/:userId/list/:ListId/task/:TaskId", () => {
-    let task;
-    beforeEach(async function createTask() {
-      task = await Task.create({ title: "teste", UserId: user.id, ListId: list.id });
+  function createTask() {
+    return Task.create({
+      title: 'teste',
+      UserId: user.id,
+      ListId: list.id
     });
-    it("updates a task", async () => {
-      const updateData = { title: "teste 2" };
+  }
+  describe('PUT /user/:userId/list/:ListId/task/:TaskId', () => {
+    let task;
+    beforeEach(async () => {
+      task = await createTask();
+    });
+    it('updates a task', async () => {
+      const updateData = { title: 'teste 2' };
       await request(app)
         .put(`/api/user/${user.id}/list/${list.id}/task/${task.id}`)
-        .set("Accept", /application\/json/)
-        .set("Authorization", `Bearer ${authResponse.body.token}`)
-        .set("UserId", authResponse.body.user.id)
+        .set(headers)
         .send(updateData)
         .expect(200);
       await task.reload();
@@ -61,17 +66,15 @@ describe("Route /task", function() {
     });
   });
 
-  describe("DELETE /user/:userId/list/:ListId/task/:TaskId", () => {
+  describe('DELETE /user/:userId/list/:ListId/task/:TaskId', () => {
     let task;
-    beforeEach(async function createTask() {
-      task = await Task.create({ title: "teste", UserId: user.id, ListId: list.id });
+    beforeEach(async () => {
+      task = await createTask();
     });
-    it("creates a task", async () => {
+    it('creates a task', async () => {
       await request(app)
         .delete(`/api/user/${user.id}/list/${list.id}/task/${task.id}`)
-        .set("Accept", /application\/json/)
-        .set("Authorization", `Bearer ${authResponse.body.token}`)
-        .set("UserId", authResponse.body.user.id)
+        .set(headers)
         .send()
         .expect(200);
       const count = (await list.getTasks()).length;
