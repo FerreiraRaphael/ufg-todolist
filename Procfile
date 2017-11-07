@@ -1,1 +1,1 @@
-web: npm run migrate --url $DATABASE_URL  && npm start
+web: npm run migrate -- --url $DATABASE_URL  && npm start
