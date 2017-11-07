@@ -9,7 +9,7 @@ const { User, List } = models;
 describe('Route /list', () => {
   before(() => models.sequelize.sync());
   let user;
-  let authResponse;
+  let headers;
   beforeEach(async () => {
     await User.destroy({ where: {} });
     await List.destroy({ where: {} });
@@ -18,7 +18,11 @@ describe('Route /list', () => {
       password: 'teste'
     };
     user = await User.create(data);
-    authResponse = await login(app, data);
+    const authResponse = await login(app, data);
+    headers = {};
+    headers.Accept = /application\/json/;
+    headers.Authorization = `Bearer ${authResponse.body.token}`;
+    headers.UserId = authResponse.body.user.id;
   });
 
   describe('GET /user/:userId/list', () => {
@@ -34,9 +38,7 @@ describe('Route /list', () => {
     it('fetchs the user lists', async () => {
       const res = await request(app)
         .get(`/api/user/${user.id}/list`)
-        .set('Accept', /application\/json/)
-        .set('Authorization', `Bearer ${authResponse.body.token}`)
-        .set('UserId', authResponse.body.user.id)
+        .set(headers)
         .send({ title: 'list test' })
         .expect(200);
 
@@ -48,9 +50,7 @@ describe('Route /list', () => {
     it('creates a list', async () => {
       await request(app)
         .post(`/api/user/${user.id}/list`)
-        .set('Accept', /application\/json/)
-        .set('Authorization', `Bearer ${authResponse.body.token}`)
-        .set('UserId', authResponse.body.user.id)
+        .set(headers)
         .send({ title: 'list test' })
         .expect(200);
       const count = (await user.getLists()).length;
@@ -67,9 +67,7 @@ describe('Route /list', () => {
       const updateData = { title: 'teste 2' };
       await request(app)
         .put(`/api/user/${user.id}/list/${list.id}`)
-        .set('Accept', /application\/json/)
-        .set('Authorization', `Bearer ${authResponse.body.token}`)
-        .set('UserId', authResponse.body.user.id)
+        .set(headers)
         .send(updateData)
         .expect(200);
       const updatedList = await List.find({ where: { id: list.id } });
@@ -85,9 +83,7 @@ describe('Route /list', () => {
     it('creates a list', async () => {
       await request(app)
         .delete(`/api/user/${user.id}/list/${list.id}`)
-        .set('Accept', /application\/json/)
-        .set('Authorization', `Bearer ${authResponse.body.token}`)
-        .set('UserId', authResponse.body.user.id)
+        .set(headers)
         .send()
         .expect(200);
       const count = (await user.getLists()).length;
