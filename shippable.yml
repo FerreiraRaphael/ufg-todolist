@@ -51,8 +51,9 @@ build:
         --dir $CODE_COVERAGE_DIR
         --root .
         --
-        -R spec --recursive $TESTS_LOC_DIR/*.spec.js &&
-        cat $CODE_COVERAGE_DIR/lcov.info | $MOD_LOC/codacy-coverage
+        -R spec --recursive $TESTS_LOC_DIR/*.spec.js
+    - cat $CODE_COVERAGE_DIR/lcov.info | $MOD_LOC/codacy-coverage
+    - cat $CODE_COVERAGE_DIR/lcov.info
     - popd
 
 
