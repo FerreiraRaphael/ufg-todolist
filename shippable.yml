@@ -27,6 +27,7 @@ env:
     - CONFIG_LOC=$SHIPPABLE_REPO_DIR/config
     - MOCHA_CONFIG=$CONFIG_LOC/mocha.ci.opts
     - ISTANBUL_CONFIG=$CONFIG_LOC/istanbul.ci.yml
+  secure: mzQmrYa+JBGR7ilNU6Ry3TgHPvvUXvjDGKDTKIRukr5slC84W93YhnU8vdLWIVIovhJSyybWzNxfQuLrXussfaRW5jQqtkwyzkHZdhjvKKLz8x8uXo1L9n58eWvw/EXv128QE/LPRAB/wwqG/1xx1YpSww9qvbzFTZJuyL1fGkLljAFiPuAg22Tcv12IBVAOQVygFF2SHEL77k06RKpXBzYEFs/AjQfZkprtIMtDV22+QOD1liE34PhjXTT0qF461M0SMTOvhcYCMLEvmzVXtmAojC1LBP91UCp9kY7E2PAfNHMXLaBPj1xNTSjFk8XRIkL07kD1hnJFT29gTnyxLw==
 
 build:
 
@@ -42,15 +43,19 @@ build:
     - $MOD_LOC/sequelize --env test db:migrate
     - mkdir -p $TEST_RESULTS_DIR && mkdir -p $CODE_COVERAGE_DIR
     - pushd $TESTS_LOC_DIR
-    - $MOD_LOC/cross-env NODE_ENV=test $MOD_LOC/mocha 
-      --recursive "$TESTS_LOC_DIR/*.spec.js" 
-      --reporter mocha-junit-reporter 
-      --reporter-options mochaFile=$TEST_RESULTS_DIR/testresults.xml 
-    - $MOD_LOC/cross-env NODE_ENV=test $MOD_LOC/istanbul 
-      --config=$ISTANBUL_CONFIG cover $SHIPPABLE_REPO_DIR/node_modules/mocha/bin/_mocha -- 
-        --reporter spec-xunit-file 
-        --recursive "$TESTS_LOC_DIR/*.spec.js" 
-    - $MOD_LOC/cross-env NODE_ENV=test $MOD_LOC/istanbul report cobertura --dir $CODE_COVERAGE_DIR 
+    - $MOD_LOC/cross-env NODE_ENV=test $MOD_LOC/istanbul cover -x *.spec.js
+      ./node_modules/mocha/bin/_mocha --report lcovonly --
+        -R spec --recursive routes/*.spec.js &&
+        cat $SHIPPABLE_REPO_DIR/coverage/lcov.info | $MOD_LOC/codacy-coverage
+    # - $MOD_LOC/cross-env NODE_ENV=test $MOD_LOC/mocha
+    #   --recursive "$TESTS_LOC_DIR/*.spec.js"
+    #   --reporter mocha-junit-reporter
+    #   --reporter-options mochaFile=$TEST_RESULTS_DIR/testresults.xml
+    # - $MOD_LOC/cross-env NODE_ENV=test $MOD_LOC/istanbul
+    #   --config=$ISTANBUL_CONFIG cover $SHIPPABLE_REPO_DIR/node_modules/mocha/bin/_mocha --
+    #     --reporter spec-xunit-file
+    #     --recursive "$TESTS_LOC_DIR/*.spec.js"
+    # - $MOD_LOC/cross-env NODE_ENV=test $MOD_LOC/istanbul report cobertura --dir $CODE_COVERAGE_DIR
     - popd
 
 
