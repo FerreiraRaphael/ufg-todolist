@@ -29,7 +29,8 @@ env:
     - MOCHA_CONFIG=$CONFIG_LOC/mocha.ci.opts
     - ISTANBUL_CONFIG=$CONFIG_LOC/istanbul.ci.yml
     - COVERALLS_SERVICE_NAME=shippable
-    - secure: EG3xE7taQe3eAYi7hG1ib5KkDHhHGXORDPNWC8Wufg6wpD3mXTPGx5aKlJb63A/6jmpWn/BWWi1H/RSDcfDTmidual7odtzePR2nWL4qw4D8c/PVyf2i/SgdvJArzHs2xO4P6u9WL2u3GbGoFGnaceU+7THT5o5kBLC4crCUFmcGiyEGQ+CPbXgVDxLdycy0px0h2USAK5KgCmR38KWeGkGDDiwzGzitqf0nrYu6jQit72dc6GT4EUyczuh+UYMbOkA/twk2K4/KG7tpmuyjqh3FuwZ7Mhr/3M/pRDMYpjZ5hvOHetNEmSTIQSzr5jmhc/j4cdYMpu+/xMspGIQ1iw==
+    - CODECLIMATE_API_HOST=https://codebeat.co/webhooks/code_coverage
+    - secure: I2h8EJyeTTGO/XbKptLM30cJ67PWkZqQn3EbfwL7umNste6uO6L6BQbzQAkJoSp5xUMm7zBZzSjfm22LTFNqxvNRXqcubVJIcm7AkLpZJaEBJe8zfPwr4mB9ZVzWoBrNQ/rccEDVCyAW3mG7AwDFWcu08LgzUpn5rw+0kFXrq0E006uDN1N1DYrtMG6OBvvQF9O1m3+bazRWEpIk6EPKgwllbhP6OjBVixvAy+mWnSpEx6W7Omps+OTJIA+FQbIutQBQ++2N6fzDPqlmufrnj1KGHIyXp/mAajbXlnVKYHatYL0J6+AUdN1o+8JAV0NMkihsYmZZXY4oRJZ6y5dq7g==
 
 build:
 
@@ -50,6 +51,7 @@ build:
     - cat $CODE_COVERAGE_DIR/lcov.info
     - cat $CODE_COVERAGE_DIR/lcov.info | $MOD_LOC/codacy-coverage
     - cat $CODE_COVERAGE_DIR/lcov.info | $SHIPPABLE_REPO_DIR/node_modules/coveralls/bin/coveralls.js
+    - $MOD_LOC/codeclimate-test-reporter < $CODE_COVERAGE_DIR/lcov.info
     - popd
 
 
