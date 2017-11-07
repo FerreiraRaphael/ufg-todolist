@@ -68,7 +68,6 @@
   },
   "prettier": {
     "singleQuote": true,
-    "parser": "typescript",
     "tabWidth": 2
   }
 }
