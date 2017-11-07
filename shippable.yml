@@ -45,23 +45,14 @@ build:
     - mkdir -p $TEST_RESULTS_DIR && mkdir -p $CODE_COVERAGE_DIR && mkdir -p $SHIPPABLE_REPO_DIR/coverage
     - pushd $TESTS_LOC_DIR
     - $MOD_LOC/istanbul cover
-        $SHIPPABLE_REPO_DIR/node_modules/mocha/bin/_mocha --report lcovonly -x *.spec.js --dir $CODE_COVERAGE_DIR --
+        $SHIPPABLE_REPO_DIR/node_modules/mocha/bin/_mocha
+        --report lcovonly
+        -x *.spec.js
+        --dir $CODE_COVERAGE_DIR
+        --root $SHIPPABLE_REPO_DIR
+        --
         -R spec --recursive $TESTS_LOC_DIR/*.spec.js &&
         cat $CODE_COVERAGE_DIR/lcov.info | $MOD_LOC/codacy-coverage
-    - ls $SHIPPABLE_REPO_DIR/coverage
-    - $MOD_LOC/istanbul report cobertura --dir $CODE_COVERAGE_DIR
-    - ls $SHIPPABLE_REPO_DIR/coverage
-    - ls $CODE_COVERAGE_DIR
-    # - cat $SHIPPABLE_REPO_DIR/coverage/lcov.info | $MOD_LOC/codacy-coverage
-    # - $MOD_LOC/cross-env NODE_ENV=test $MOD_LOC/mocha
-    #   --recursive "$TESTS_LOC_DIR/*.spec.js"
-    #   --reporter mocha-junit-reporter
-    #   --reporter-options mochaFile=$TEST_RESULTS_DIR/testresults.xml
-    # - $MOD_LOC/cross-env NODE_ENV=test $MOD_LOC/istanbul
-    #   --config=$ISTANBUL_CONFIG cover $SHIPPABLE_REPO_DIR/node_modules/mocha/bin/_mocha --
-    #     --reporter spec-xunit-file
-    #     --recursive "$TESTS_LOC_DIR/*.spec.js"
-    # - $MOD_LOC/cross-env NODE_ENV=test $MOD_LOC/istanbul report cobertura --dir $CODE_COVERAGE_DIR
     - popd
 
 
