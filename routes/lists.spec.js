@@ -70,8 +70,8 @@ describe('Route /list', () => {
         .set(headers)
         .send(updateData)
         .expect(200);
-      const updatedList = await List.find({ where: { id: list.id } });
-      expect(updatedList.title).to.be(updateData.title);
+      await list.reload();
+      expect(list.title).to.be(updateData.title);
     });
   });
 
