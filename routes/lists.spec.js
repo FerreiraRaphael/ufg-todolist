@@ -70,11 +70,10 @@ describe('Route /list', () => {
         .set(headers)
         .send(updateData)
         .expect(200)
-        .end(() => {
-          list.reload().then(() => {
-            expect(list.title).to.be(updateData.title);
-            done();
-          });
+        .end(async () => {
+          await list.reload();
+          expect(list.title).to.be(updateData.title);
+          done();
         });
     });
   });
