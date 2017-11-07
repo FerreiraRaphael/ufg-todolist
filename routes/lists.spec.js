@@ -63,18 +63,15 @@ describe('Route /list', () => {
     beforeEach(async () => {
       list = await List.create({ title: 'teste', UserId: user.id });
     });
-    it('updates a list', done => {
+    it('updates a list', async () => {
       const updateData = { title: 'teste 2' };
       request(app)
         .put(`/api/user/${user.id}/list/${list.id}`)
         .set(headers)
         .send(updateData)
-        .expect(200)
-        .end(async () => {
-          await list.reload();
-          expect(list.title).to.be(updateData.title);
-          done();
-        });
+        .expect(200);
+      await list.reload();
+      expect(list.title).to.be(updateData.title);
     });
   });
 
