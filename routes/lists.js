@@ -39,7 +39,7 @@ router
     isCurrentUserMiddlaware,
     async function updateList(req, res) {
       const id = req.params.ListId;
-      const result = List.update(req.body, { where: { id } });
+      const result = await List.update(req.body, { where: { id } });
       res.json(result);
     }
   ])
