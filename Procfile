@@ -1,1 +1,1 @@
-web: cp config/config.example.json config/config.json && npm run migrate && npm start
+web: npm run migrate --url $DATABASE_URL  && npm start
