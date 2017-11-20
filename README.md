@@ -3,6 +3,7 @@
 This repository demonstrates the usage of Sequelize within an [Express](https://expressjs.com) application.
 The implemented logic is a simple task tracking tool.
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b2777007f6df4b858ba013c5e3dd3a98)](https://www.codacy.com/app/FerreiraRaphael/ufg-todolist?utm_source=github.com&utm_medium=referral&utm_content=FerreiraRaphael/ufg-todolist&utm_campaign=badger)
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 ## Starting App
