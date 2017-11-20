@@ -56,6 +56,14 @@ describe('Route /list', () => {
       const count = (await user.getLists()).length;
       expect(count).to.be(1);
     });
+    it('it dosent create if it is not current user', async () => {
+      const user2 = await User.create({ password: 'teste', username: 'teste 2' });
+      const response = await request(app)
+      .post(`/api/user/${user.id}/list`)
+      .set(headers)
+      .send({ title: 'list test' })
+      .expect(200);
+    })
   });
 
   describe('PUT /user/:userId/list/:ListId', () => {

@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { User } = require('../models');
+const { authMiddlaware } = require('./middlawares');
 
 const router = express.Router();
 
@@ -15,14 +16,14 @@ router
     if (!valid) res.json('username or password incorrect');
     const token = await jwt.sign(
       user.dataValues,
-      `${process.env.APP_SECRET || 'development'} ${user.lastLogout}`,
+      `${process.env.APP_SECRET || 'development'} ${user.lastLogout.getTime()}`
     );
     res.json({ token, user });
   })
-  .delete(async (req, res) => {
-    const { username } = req.body;
-    await User.update({ lastLogout: new Date() }, { where: { username } });
+  .delete([...authMiddlaware, async (req, res) => {
+    const { id } = req.user;
+    await User.update({ lastLogout: new Date() }, { where: { id } });
     res.json('Logout');
-  });
+  }]);
 
 module.exports = router;

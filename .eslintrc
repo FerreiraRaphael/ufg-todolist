@@ -10,5 +10,8 @@
     "it": false,
     "before": false,
     "beforeEach": false
+  },
+  "settings": {
+    "import/external-module-folders": ["node_modules", "client/node_modules"]
   }
 }
