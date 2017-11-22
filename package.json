@@ -14,7 +14,8 @@
     "test:debug": "cross-env NODE_ENV=test mocha debug routes/*.spec.js",
     "test:coverage": "cross-env NODE_ENV=test nyc npm run test",
     "report:coverage": "cross-env NODE_ENV=test nyc report",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "dependencies": {
     "bcrypt": "^1.0.3",
