@@ -4,7 +4,10 @@ import { withRouter, Link } from 'react-router-dom';
 import { connect } from "react-redux";
 
 const Navbar = () => (
-  <nav className="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+  <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <Link className="navbar-brand" to="/">
+      UFG Todo
+    </Link>
     <button
       className="navbar-toggler navbar-toggler-right"
       type="button"
@@ -16,10 +19,6 @@ const Navbar = () => (
     >
       <span className="navbar-toggler-icon" />
     </button>
-    <Link className="navbar-brand" to="/">
-      Navbar
-    </Link>
-
     <div className="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul className="navbar-nav ml-auto">
         <li className="nav-item active">
