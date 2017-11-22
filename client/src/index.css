@@ -6,23 +6,6 @@ html, body, #root {
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
 }
 
-@media (min-width: 768px) {
-  .app-container {
-    width: 700px;
-    height: 750px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-  }
-  .app-wrapper {
-    height: 100%;
-    min-height: 100%;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-align-items: center;
-    align-items: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-  }
-}
+

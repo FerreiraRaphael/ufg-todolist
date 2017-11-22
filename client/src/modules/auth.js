@@ -1,4 +1,4 @@
-import { POST, DELETE } from '../lib/request';
+import { GET, POST, DELETE } from '../lib/request';
 
 /**
  * Actions
@@ -12,14 +12,20 @@ const LOGOUT_FAIL = 'auth/LOGOUT_FAIL';
 const SIGNUP = 'auth/SIGNUP';
 const SIGNUP_SUCCESS = 'auth/SIGNUP_SUCCESS';
 const SIGNUP_FAIL = 'auth/SIGNUP_FAIL';
+const LOADING = 'auth/LOADING';
+const LOADING_SUCCESS = 'auth/LOADING_SUCCESS';
+const LOADING_FAIL = 'auth/LOADING_FAIL';
 
 const initialState = {
+  loading: false,
   logginIn: false,
   logginOut: false,
   signingUp: false,
   signUpError: null,
   loginError: null,
   logoutError: null,
+  loadingError: null,
+  authenticated: false,
   user: {
     id: '',
     username: ''
@@ -63,6 +69,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         logginIn: false,
+        authenticated: true,
         user: action.result,
         loginError: null
       };
@@ -71,6 +78,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         logginIn: false,
+        authenticated: false,
         user: initialState.user,
         loginError: action.result
       };
@@ -85,6 +93,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         logginOut: false,
+        authenticated: false,
         user: initialState.user
       };
     case LOGOUT_FAIL:
@@ -92,6 +101,30 @@ export default (state = initialState, action) => {
         ...state,
         logginOut: false,
         logoutError: action.result
+      };
+    case LOADING:
+      return {
+        ...state,
+        loading: true,
+        loadError: null
+      };
+
+    case LOADING_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        authenticated: true,
+        user: action.result,
+        loadError: null
+      };
+
+    case LOADING_FAIL:
+      return {
+        ...state,
+        loading: false,
+        authenticated: false,
+        user: null,
+        loadError: action.result
       };
 
     default:
@@ -116,17 +149,26 @@ const logginError = error => ({
   result: error
 });
 
-export const login = ({ username, password }) => async dispatch => {
-  dispatch(logginIn());
-  try {
-    const result = await POST({ url: 'auth', body: { username, password } });
-    dispatch(logginSuccess(result.data.user));
-    localStorage.setItem('token', result.data.token);
-  } catch (e) {
-    dispatch(logginError(e));
-    localStorage.setItem('token', '');
-  }
-};
+export const login = ({ username, password }) => dispatch =>
+  new Promise(async (resolve, reject) => {
+    dispatch(logginIn());
+    try {
+      const response = await POST({
+        url: 'auth',
+        body: { username, password }
+      });
+      const result = await response.json();
+      dispatch(logginSuccess(result.user));
+      localStorage.setItem('token', result.token);
+      localStorage.setItem('userid', result.user.id);
+      resolve(response);
+    } catch (e) {
+      dispatch(logginError(e));
+      localStorage.setItem('token', '');
+      localStorage.setItem('userid', '');
+      reject(e);
+    }
+  });
 
 const logginOut = () => ({
   type: LOGOUT
@@ -146,9 +188,11 @@ export const logout = () => async (dispatch, getState) => {
     });
     dispatch(logoutSuccess());
     localStorage.setItem('token', '');
+    localStorage.setItem('userid', '');
   } catch (e) {
     dispatch(logginError(e));
     localStorage.setItem('token', '');
+    localStorage.setItem('userid', '');
   }
 };
 
@@ -165,12 +209,48 @@ const signingUpFail = error => ({
   result: error
 });
 
-export const signUp = body => async dispatch => {
-  dispatch(signingUp());
-  try {
-    await POST({ url: 'user', body });
-    dispatch(signingUpSuccess());
-  } catch (e) {
-    dispatch(signingUpFail(e));
-  }
-};
+export const signUp = body => dispatch =>
+  new Promise(async (resolve, reject) => {
+    dispatch(signingUp());
+    try {
+      const response = await POST({ url: 'user', body });
+      dispatch(signingUpSuccess());
+      resolve(response);
+    } catch (e) {
+      dispatch(signingUpFail(e));
+      reject(e);
+    }
+  });
+
+const loading = () => ({
+  type: LOADING
+});
+
+const loadingSuccess = user => ({
+  type: LOADING_SUCCESS,
+  result: user
+});
+
+const loadingFail = error => ({
+  type: LOADING_FAIL,
+  result: error
+});
+
+export const loadUser = () => async dispatch =>
+  new Promise(async (resolve, reject) => {
+    dispatch(loading());
+    try {
+      const result = await GET({
+        url: 'user/me',
+        auth: { token: localStorage.token, userid: localStorage.userid }
+      });
+      const response = await result.json();
+      dispatch(loadingSuccess(response));
+      resolve(result);
+    } catch (e) {
+      dispatch(loadingFail(e));
+      localStorage.setItem('token', '');
+      localStorage.setItem('userid', '');
+      reject(e);
+    }
+  });

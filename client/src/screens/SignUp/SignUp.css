@@ -1,0 +1,35 @@
+.SignUp-container {
+  max-width: 800px;
+  max-height: 600px;
+  background: #ffffff;
+  z-index: 9999;
+}
+
+.SignUp-main {
+  margin: 50px;
+  font-size: 16px;
+}
+
+.SignUp-footer {
+  background-color: #f6f8f8;
+  padding: 35px 82px;
+}
+
+@media (max-width: 576px) {
+  .SignUp-main {
+    margin: 0;
+  }
+  .SignUp-welcome {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: #fff;
+    background-color: #0d47a1;
+  }
+  .SignUp-welcome a {
+    color: #fff;
+    text-decoration: underline;
+  }
+  .SignUp-form {
+    margin-top: 15px;
+  }
+}
