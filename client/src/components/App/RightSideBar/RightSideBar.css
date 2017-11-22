@@ -1,0 +1,19 @@
+.RightSideBar-container {
+  position: absolute;
+  width: 35%;
+  height: 100%;
+  right: -35%;
+  background: yellow;
+  transition: all .1s ease;
+}
+
+@media (max-width: 576px) {
+  .RightSideBar-container {
+    width: 275px;
+    right: -275px;
+  }
+}
+
+.RightSideBar-open {
+  right: 0;
+}
