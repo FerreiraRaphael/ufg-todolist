@@ -54,7 +54,7 @@ passport.use(
       const { lastLogout } = await User.find({ where: { id } });
       const user = await jwt.verify(
         token,
-        `${process.env.APP_SECRET || 'development'} ${lastLogout}`
+        `${process.env.APP_SECRET || 'development'} ${id} ${lastLogout.getTime()}`
       );
       if (!user) {
         return done(null, { error: 'Não foi possível autenticar' });
