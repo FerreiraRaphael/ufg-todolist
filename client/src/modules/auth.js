@@ -154,7 +154,7 @@ export const login = ({ username, password }) => dispatch =>
     dispatch(logginIn());
     try {
       const response = await POST({
-        url: 'auth',
+        url: 'api/auth',
         body: { username, password }
       });
       const result = await response.json();
@@ -183,7 +183,7 @@ export const logout = () => async (dispatch, getState) => {
   dispatch(logginOut());
   try {
     await DELETE({
-      url: 'auth',
+      url: 'api/auth',
       auth: { token: localStorage.token, userid: user.id }
     });
     dispatch(logoutSuccess());
@@ -213,7 +213,7 @@ export const signUp = body => dispatch =>
   new Promise(async (resolve, reject) => {
     dispatch(signingUp());
     try {
-      const response = await POST({ url: 'user', body });
+      const response = await POST({ url: 'api/user', body });
       dispatch(signingUpSuccess());
       resolve(response);
     } catch (e) {
@@ -241,7 +241,7 @@ export const loadUser = () => async dispatch =>
     dispatch(loading());
     try {
       const result = await GET({
-        url: 'user/me',
+        url: 'api/user/me',
         auth: { token: localStorage.token, userid: localStorage.userid }
       });
       const response = await result.json();
