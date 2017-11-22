@@ -13,5 +13,9 @@
   },
   "settings": {
     "import/external-module-folders": ["node_modules", "client/node_modules"]
+  },
+  "rules": {
+    "import/prefer-default-export": 0,
+    "jsx-a11y/anchor-is-valid": 0
   }
 }
