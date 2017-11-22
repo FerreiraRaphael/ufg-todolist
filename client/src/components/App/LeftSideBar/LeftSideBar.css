@@ -1,0 +1,18 @@
+.LeftSideBar-container {
+  width: 35%;
+  height: 100%;
+  background: red;
+}
+
+@media (max-width: 576px) {
+  .LeftSideBar-container {
+    width: 275px;
+    left: -275px;
+    position: absolute;
+    transition: all .1s ease;
+  }
+}
+
+.LeftSideBar-open {
+  left: 0;
+}

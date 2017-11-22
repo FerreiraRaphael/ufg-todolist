@@ -6,13 +6,8 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 import LoginScreen from '../../screens/Login';
 import SignUpScreen from '../../screens/SignUp';
+import AppScreen from '../../screens/App';
 import './App.css';
-
-const Home = () => (
-  <div>
-    <h2>Home</h2>
-  </div>
-);
 
 const About = () => (
   <div>
@@ -50,7 +45,7 @@ class App extends React.Component {
           exact
           path="/"
           render={() =>
-            this.props.authenticated ? <Home /> : <Redirect to="/signup" />}
+            this.props.authenticated ? <AppScreen /> : <Redirect to="/signup" />}
         />
         <Route path="/about" component={About} />
         <Route
