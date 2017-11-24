@@ -62,12 +62,19 @@
     top: 0;
     background-color: #0d47a1;
   }
+
+  .App-panel {
+    border-radius: 0;
+  }
 }
 
 @media (min-width: 1441px) {
   .App-container {
     width: 1441px;
     height: calc(100% - 38px);
+  }
+  .App-panel {
+    border-radius: .25em;
   }
 }
 
