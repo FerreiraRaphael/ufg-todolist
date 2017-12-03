@@ -1,0 +1,37 @@
+.MoreOptions-container{
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.MoreOptions-menu {
+  margin-left: 10px;
+  border-radius: 50%;
+  padding: 8px;
+  flex: none;
+  height: 40px;
+  position: relative;
+  transition: background-color 0.18s ease;
+  cursor: pointer;
+}
+.MoreOptions-menu:focus,
+.MoreOptions-menu:hover,
+.MoreOptions-menu:active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.MoreOptions-dropdown {
+  position: absolute;
+  top: 10px;
+  left: -60px;
+  min-width: 100px;
+  transform: translate3d(0px, 35px, 0px) scale(0);
+  transform-origin: right top 0px;
+  transition: all 0.1s ease;
+  display: block;
+}
+
+.show > .MoreOptions-dropdown {
+  transform: translate3d(0px, 35px, 0px) scale(1);
+}
+

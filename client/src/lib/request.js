@@ -5,7 +5,7 @@ const options = ({ method, body, auth: { token, userid } }) => ({
   headers: {
     'Content-Type': 'application/json',
     ...(token ? { Authorization: `Bearer ${token || ''}` } : {}),
-    ...(userid ? {userid} : {})
+    ...(userid ? { userid } : {})
   },
   ...(body ? { body: JSON.stringify(body) } : {})
 });

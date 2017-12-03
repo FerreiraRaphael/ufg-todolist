@@ -1,0 +1,11 @@
+.Lists-container {
+  flex: 1;
+  background: #fff;
+  overflow-y: auto;
+  overflow-x: visible;
+}
+
+.Lists-container > ul {
+  list-style: none;
+  padding: 0;
+}
