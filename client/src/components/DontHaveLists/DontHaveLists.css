@@ -1,0 +1,22 @@
+.DontHaveLists-container {
+  background: white;
+  width: 100%;
+  text-align: center;
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.DontHaveLists-container > .AppMainHeader-container {
+  border-left: 0;
+}
+
+.DontHaveLists-container > i {
+  font-size: 120px;
+  margin: 25px auto;
+  color: #2196F3;
+}
+
+.DontHaveLists-container > p {
+  font-size: 20px;
+  margin-bottom: 25px;
+  color: #2196F3;
+}

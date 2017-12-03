@@ -1,0 +1,31 @@
+.AppMainHeader-container {
+  flex: none;
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
+  height: 60px;
+  width: 100%;
+  background-color: #eee;
+  box-sizing: border-box;
+  padding: 10px;
+  position: relative;
+  padding-right: 16px;
+  padding-left: 15px;
+  justify-content: flex-start;
+  display: flex;
+  align-items: center;
+}
+
+.AppMainHeader-label {
+  font-size: 20px;
+  text-align: center;
+  flex: 1;
+}
+
+.AppMainHeader-controls > .material-icons {
+  font-size: 30px;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+@media (max-width: 576px) {
+
+}

@@ -10,7 +10,7 @@ const LoginFormContainer = ({ login, logginIn, history }) => (
       try {
         await login(values);
         toast.success('Bem vindo de volta.');
-        history.push('/');
+        history.push('/app');
       } catch(e) {
         setErrors(e);
         toast.error('Não foi entrar na conta desejada.');

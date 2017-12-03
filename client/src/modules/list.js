@@ -1,4 +1,4 @@
-import { GET } from '../lib/request';
+import { GET, POST, DELETE } from '../lib/request';
 
 /**
  * Actions
@@ -18,6 +18,7 @@ const DELETE_LIST_FAIL = 'lists/DELETE_LIST_FAIL';
 const ADD_LISTS = 'lists/ADD_LISTS';
 const CHANGE_LIST = 'lists/CHANGE_LIST';
 const REMOVE_LIST = 'lists/REMOVE_LIST';
+const SELECT_LIST = 'lists/SELECT_LIST';
 
 const initialState = {
   fetching: false,
@@ -28,7 +29,8 @@ const initialState = {
   editingError: null,
   deleting: false,
   deletingError: null,
-  lists: []
+  lists: [],
+  selectedList: null
 };
 
 /**
@@ -73,7 +75,7 @@ export default (state = initialState, action) => {
     case CREATE_LIST_FAIL:
       return {
         ...state,
-        creating: true,
+        creating: false,
         creatingError: action.result
       };
 
@@ -118,7 +120,7 @@ export default (state = initialState, action) => {
     case ADD_LISTS:
       return {
         ...state,
-        lists: [...state.lists, ...action.result]
+        lists: [...state.lists, action.result]
       };
 
     case CHANGE_LIST: {
@@ -133,8 +135,18 @@ export default (state = initialState, action) => {
       };
     }
 
+    case SELECT_LIST: {
+      const selectedList = state.lists.find(
+        list => list.id === Number(action.result)
+      );
+      return {
+        ...state,
+        selectedList
+      };
+    }
+
     case REMOVE_LIST: {
-      const index = state.lists.findIndex(list => list.id === action.result.id);
+      const index = state.lists.findIndex(list => list.id === action.result);
       return {
         ...state,
         lists: [...state.lists.slice(0, index), ...state.lists.slice(index + 1)]
@@ -150,20 +162,25 @@ export default (state = initialState, action) => {
  * Action Creators
  */
 
-// const addLists = lists => ({
-//   type: ADD_LISTS,
-//   result: lists
-// });
+const addLists = lists => ({
+  type: ADD_LISTS,
+  result: lists
+});
 
 // const changeList = list => ({
 //   type: CHANGE_LIST,
 //   result: list
 // });
 
-// const removeList = list => ({
-//   type: ADD_LISTS,
-//   result: list
-// });
+const removeList = list => ({
+  type: REMOVE_LIST,
+  result: list
+});
+
+export const selectList = list => ({
+  type: SELECT_LIST,
+  result: list
+});
 
 const fetching = () => ({
   type: FETCH_LISTS
@@ -185,7 +202,7 @@ export const fetchLists = () => (dispatch, getState) =>
     try {
       const userId = getState().auth.user.id;
       const response = await GET({
-        url: `api/user/${userId}/list`,
+        url: `/api/user/${userId}/list`,
         auth: {
           token: localStorage.token,
           userid: localStorage.userid
@@ -200,14 +217,75 @@ export const fetchLists = () => (dispatch, getState) =>
     }
   });
 
-// const creating = () => ({
-//   type: CREATE_LIST
-// });
+const creating = () => ({
+  type: CREATE_LIST
+});
 
-// const creatingSuccess = () => ({
-//   type: CREATE_LIST_SUCCESS
-// });
+const creatingSuccess = () => ({
+  type: CREATE_LIST_SUCCESS
+});
 
-// const creatingFail = () => ({
-//   type: CREATE_LIST_FAIL
-// });
+const creatingFail = () => ({
+  type: CREATE_LIST_FAIL
+});
+
+export const create = ({ title }) => (dispatch, getState) =>
+  new Promise(async (resolve, reject) => {
+    dispatch(creating());
+    try {
+      const userId = getState().auth.user.id;
+      const response = await POST({
+        url: `/api/user/${userId}/list`,
+        auth: {
+          token: localStorage.token,
+          userid: localStorage.userid
+        },
+        body: { title }
+      });
+      const result = await response.json();
+      dispatch(creatingSuccess());
+      dispatch(addLists(result));
+      resolve(response);
+    } catch (e) {
+      dispatch(creatingFail(e));
+      reject(e);
+    }
+  });
+
+const deleting = () => ({
+  type: DELETE_LIST
+});
+
+const deletingSuccess = () => ({
+  type: DELETE_LIST_SUCCESS
+});
+
+const deletingFail = () => ({
+  type: DELETE_LIST_FAIL
+});
+
+export const deleteList = id => (dispatch, getState) =>
+  new Promise(async (resolve, reject) => {
+    dispatch(deleting());
+    try {
+      const userId = getState().auth.user.id;
+      const selectedId = getState().list.selectedList.id;
+      const response = await DELETE({
+        url: `/api/user/${userId}/list/${id}`,
+        auth: {
+          token: localStorage.token,
+          userid: localStorage.userid
+        }
+      });
+      dispatch(deletingSuccess());
+      dispatch(removeList(id));
+      const { lists } = getState().list;
+      if (selectedId === id && lists[0]) {
+        dispatch(selectList(lists[0].id));
+      }
+      resolve(response);
+    } catch (e) {
+      dispatch(deletingFail(e));
+      reject(e);
+    }
+  });
