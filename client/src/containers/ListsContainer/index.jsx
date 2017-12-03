@@ -1,19 +1,24 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchLists } from '../../modules/list';
+import { withRouter } from 'react-router-dom';
+import { fetchLists, deleteList } from '../../modules/list';
 import ListsContainer from './ListsContainer';
 
-const mapStateToProps = ({ list }) => ({
-  fetching: list.fetching,
-  lists: list.lists
+const mapStateToProps = ({ list: { fetching, lists, selectedList } }) => ({
+  fetching,
+  lists,
+  selectedList
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      fetchLists
+      fetchLists,
+      deleteList
     },
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListsContainer);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(ListsContainer)
+);

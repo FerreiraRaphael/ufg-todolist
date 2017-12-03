@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {withRouter} from 'react-router-dom';
 import './AppMain.css';
 
 const AppMain = ({ children }) => <div className="AppMain-container rounded-right">{children}</div>;
@@ -11,4 +12,4 @@ AppMain.propTypes = {
   ]).isRequired
 };
 
-export default AppMain;
+export default withRouter(AppMain);

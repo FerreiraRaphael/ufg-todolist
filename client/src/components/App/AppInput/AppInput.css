@@ -1,0 +1,36 @@
+.AppInput-container {
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  background-color: #f5f1ee;
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
+  position: relative;
+}
+
+.AppInput-container > textarea {
+  margin-right: 10px;
+  resize: none;
+  border-radius: 5px;
+  width: inherit;
+  background-color: #ffffff;
+  flex: 1 1 auto;
+  min-width: 0;
+  border-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  box-sizing: border-box;
+  padding-right: 16px;
+  line-height: 20px;
+  font-size: 15px;
+  min-height: 20px;
+  border: none;
+  padding: 10px 12px;
+  width: 100%;
+  outline: none;
+}
+
+.AppInput-controls{
+  width: 40px;
+  transition: all .24s ease;
+}

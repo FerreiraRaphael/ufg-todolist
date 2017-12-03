@@ -1,31 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cs from 'classnames';
-import { Circle } from 'rc-progress';
-import { listSchema } from '../../../schemas';
+import { taskSchema } from '../../../schemas';
 import MoreOptions from '../../MoreOptions';
-import './ListItem.css';
+import TaskItemInput from './TaskItemInput';
+import './TaskItem.css';
 
-const ListItem = ({ title, id, selected, onEdit, onDelete, onClick }) => (
-  <li className={cs('ListItem-container', { selected })}>
-    <div className="ListItem-task-progress">
-      <Circle percent="59" strokeWidth="10" strokeColor="#2196F3" />
-      <div className="ListItem-task-number">+99</div>
-    </div>
-    <div
-      onClick={() => onClick()}
-      role="link"
-      tabIndex={0}
-      onKeyPress={event => {
-        if (event.key === 13) {
-          onClick();
-        }
+const TaskItem = ({ id, title, done, onEdit, onDelete, onTaskToggle }) => (
+  <li className={cs('TaskItem-container')}>
+    <TaskItemInput
+      done={done}
+      onChange={checked => {
+        onTaskToggle({ id, title, done: checked });
       }}
-      className="ListItem-title ellipsify"
-    >
-      {title}
+    />
+    <div className="TaskItem-title ellipsify">
+      <span>{title}</span>
     </div>
-    <div className="ListItem-controls">
+    <div className="TaskItem-controls">
       <MoreOptions icon="keyboard_arrow_down">
         <a
           role="button"
@@ -52,16 +44,16 @@ const ListItem = ({ title, id, selected, onEdit, onDelete, onClick }) => (
   </li>
 );
 
-ListItem.defaultProps = {
+TaskItem.defaultProps = {
   selected: false
 };
 
-ListItem.propTypes = {
-  ...listSchema,
+TaskItem.propTypes = {
+  ...taskSchema,
   selected: PropTypes.bool,
   onDelete: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,
-  onClick: PropTypes.func.isRequired
+  onTaskToggle: PropTypes.func.isRequired
 };
 
-export default ListItem;
+export default TaskItem;

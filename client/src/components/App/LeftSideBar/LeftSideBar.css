@@ -7,10 +7,11 @@
 
 @media (max-width: 576px) {
   .LeftSideBar-container {
-    width: 275px;
-    left: -275px;
+    width: 100%;
+    left: -100%;
     position: absolute;
     transition: all .1s ease;
+    z-index: 1;
   }
 }
 
