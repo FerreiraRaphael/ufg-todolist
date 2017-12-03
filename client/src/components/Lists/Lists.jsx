@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ListItemContainer from '../../containers/ListItemContainer';
+import ListItem from './ListItem';
 import { listSchema } from '../../schemas';
 import './Lists.css';
 
@@ -8,7 +8,7 @@ const Lists = ({ lists, selectedList, onDelete, onEdit }) => (
   <div className="Lists-container">
     <ul>
       {lists.map(list => (
-        <ListItemContainer
+        <ListItem
           key={list.id}
           {...list}
           selected={selectedList && selectedList.id === list.id}
