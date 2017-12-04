@@ -4,7 +4,7 @@ import ListItem from './ListItem';
 import { listSchema } from '../../schemas';
 import './Lists.css';
 
-const Lists = ({ lists, selectedList, onDelete, onEdit }) => (
+const Lists = ({ lists, selectedList, onDelete }) => (
   <div className="Lists-container">
     <ul>
       {lists.map(list => (
@@ -13,7 +13,6 @@ const Lists = ({ lists, selectedList, onDelete, onEdit }) => (
           {...list}
           selected={selectedList && selectedList.id === list.id}
           onDelete={onDelete}
-          onEdit={onEdit}
         />
       ))}
     </ul>
@@ -30,8 +29,7 @@ Lists.defaultProps = {
 Lists.propTypes = {
   lists: PropTypes.arrayOf(PropTypes.shape(listSchema)).isRequired,
   selectedList: PropTypes.shape(listSchema),
-  onDelete: PropTypes.func.isRequired,
-  onEdit: PropTypes.func.isRequired
+  onDelete: PropTypes.func.isRequired
 };
 
 export default Lists;

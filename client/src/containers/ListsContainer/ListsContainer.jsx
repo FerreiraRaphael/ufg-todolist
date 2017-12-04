@@ -14,6 +14,8 @@ class ListsContainer extends React.Component {
 
     if (lists.length === 0 && newList.length !== 0) {
       history.push(`/app/list/${newList[0].id}`);
+    } else if (newProps.location.pathname === '/app' && newList.length) {
+      history.push(`/app/list/${newList[0].id}`);
     }
   }
 
@@ -25,9 +27,6 @@ class ListsContainer extends React.Component {
         loading={fetching}
         selectedList={selectedList}
         onDelete={deleteList}
-        onEdit={id => {
-          console.log(id);
-        }}
       />
     );
   }
@@ -47,6 +46,7 @@ ListsContainer.propTypes = {
   selectedList: PropTypes.shape(listSchema),
   lists: PropTypes.arrayOf(PropTypes.shape(listSchema)).isRequired,
   history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  location: PropTypes.object.isRequired, // eslint-disable-line
   deleteList: PropTypes.func.isRequired
 };
 

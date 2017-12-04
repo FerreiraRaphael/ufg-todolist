@@ -154,7 +154,7 @@ export const login = ({ username, password }) => dispatch =>
     dispatch(logginIn());
     try {
       const response = await POST({
-        url: 'api/auth',
+        url: '/api/auth',
         body: { username, password }
       });
       const result = await response.json();

@@ -21,11 +21,13 @@ const AppScreen = ({
   selectedList,
   haveLists,
   leftSideBar,
-  rightSideBar
+  rightSideBar,
+  logout,
+  expandLeftSideBar
 }) => (
   <AppPanel>
     <LeftSideBar open={leftSideBar}>
-      <LeftSideBarHeader username={user.username} />
+      <LeftSideBarHeader username={user.username} onSignOutClick={logout} />
       <ListsContainer />
       <ListInput />
     </LeftSideBar>
@@ -36,7 +38,7 @@ const AppScreen = ({
         <TaskInput />
       </AppMain>
     ) : (
-      <DontHaveLists />
+      <DontHaveLists onCreateClick={expandLeftSideBar} />
     )}
     <RightSideBar open={rightSideBar}>
       <div />
@@ -56,7 +58,9 @@ AppScreen.propTypes = {
   selectedList: PropTypes.shape(listSchema),
   haveLists: PropTypes.bool.isRequired,
   leftSideBar: PropTypes.bool.isRequired,
-  rightSideBar: PropTypes.bool.isRequired
+  expandLeftSideBar: PropTypes.func.isRequired,
+  rightSideBar: PropTypes.bool.isRequired,
+  logout: PropTypes.func.isRequired
 };
 
 export default AppScreen;
