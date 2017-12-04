@@ -6,13 +6,8 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 import LoginScreen from '../../screens/Login';
 import SignUpScreen from '../../screens/SignUp';
+import AppScreen from '../../screens/App';
 import './App.css';
-
-const Home = () => (
-  <div>
-    <h2>Home</h2>
-  </div>
-);
 
 const About = () => (
   <div>
@@ -50,18 +45,33 @@ class App extends React.Component {
           exact
           path="/"
           render={() =>
-            this.props.authenticated ? <Home /> : <Redirect to="/signup" />}
+            this.props.authenticated ? (
+              <Redirect to="/app" />
+            ) : (
+              <Redirect to="/signup" />
+            )}
         />
-        <Route path="/about" component={About} />
         <Route
+          path="/app"
+          render={() =>
+            this.props.authenticated ? <AppScreen /> : <Redirect to="/login" />}
+        />
+        <Route exact path="/about" component={About} />
+        <Route
+          exact
           path="/login"
           render={() =>
-            this.props.authenticated ? <Redirect to="/" /> : <LoginScreen />}
+            this.props.authenticated ? <Redirect to="/app" /> : <LoginScreen />}
         />
         <Route
+          exact
           path="/signup"
           render={() =>
-            this.props.authenticated ? <Redirect to="/" /> : <SignUpScreen />}
+            this.props.authenticated ? (
+              <Redirect to="/app" />
+            ) : (
+              <SignUpScreen />
+            )}
         />
       </div>
     );

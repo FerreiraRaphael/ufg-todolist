@@ -1,0 +1,26 @@
+.RightSideBar-container {
+  width: 0px;
+  height: 100%;
+  background: yellow;
+  transition: transform 0.24s ease;
+  transform: translateX(100%);
+  z-index: 1;
+}
+
+.RightSideBar-open {
+  width: 325px;
+  transform: translateX(0%);
+}
+
+@media (max-width: 576px) {
+  .RightSideBar-container {
+    width: 100%;
+    position: absolute;
+    right: -100%;
+    transition: all 0.24s ease;
+    transform: translateX(0%);
+  }
+  .RightSideBar-open {
+    right: 0;
+  }
+}
