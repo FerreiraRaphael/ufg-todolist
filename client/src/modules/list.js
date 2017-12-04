@@ -1,4 +1,4 @@
-import { GET, POST, DELETE } from '../lib/request';
+import { GET, POST, DELETE, PUT } from '../lib/request';
 
 /**
  * Actions
@@ -167,10 +167,10 @@ const addLists = lists => ({
   result: lists
 });
 
-// const changeList = list => ({
-//   type: CHANGE_LIST,
-//   result: list
-// });
+const changeList = list => ({
+  type: CHANGE_LIST,
+  result: list
+});
 
 const removeList = list => ({
   type: REMOVE_LIST,
@@ -286,6 +286,47 @@ export const deleteList = id => (dispatch, getState) =>
       resolve(response);
     } catch (e) {
       dispatch(deletingFail(e));
+      reject(e);
+    }
+  });
+
+const editing = () => ({
+  type: DELETE_LIST
+});
+
+const editingSuccess = () => ({
+  type: DELETE_LIST_SUCCESS
+});
+
+const editingFail = () => ({
+  type: DELETE_LIST_FAIL
+});
+
+export const editList = list => (dispatch, getState) =>
+  new Promise(async (resolve, reject) => {
+    dispatch(editing());
+    try {
+      const userId = getState().auth.user.id;
+      const selectedId = getState().list.selectedList.id;
+      const { id, title } = list;
+      const response = await PUT({
+        url: `/api/user/${userId}/list/${id}`,
+        auth: {
+          token: localStorage.token,
+          userid: localStorage.userid
+        },
+        body: {
+          title
+        }
+      });
+      dispatch(editingSuccess());
+      dispatch(changeList(list));
+      if (selectedId === list.id) {
+        dispatch(selectList(list.id));
+      }
+      resolve(response);
+    } catch (e) {
+      dispatch(editingFail(e));
       reject(e);
     }
   });
