@@ -11,6 +11,7 @@ class TaskItemInput extends React.Component {
 
   render() {
     const { done } = this.state;
+    const {disabled} = this.props;
     return (
       <div className="TaskItem-input">
         <div className="form-check">
@@ -24,6 +25,7 @@ class TaskItemInput extends React.Component {
                 this.setState({ done: event.target.checked });
                 this.props.onChange(event.target.checked);
               }}
+              disabled={disabled}
             />
           </div>
         </div>
@@ -33,12 +35,14 @@ class TaskItemInput extends React.Component {
 }
 
 TaskItemInput.defaultProps = {
-  done: false
+  done: false,
+  disabled: false
 };
 
 TaskItemInput.propTypes = {
   done: PropTypes.bool,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  disabled: PropTypes.bool
 };
 
 export default TaskItemInput;
