@@ -139,7 +139,6 @@ ListItem.propTypes = {
   selected: PropTypes.bool,
   editList: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
-  onEdit: PropTypes.func.isRequired,
   collapseLeftSideBar: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired // eslint-disable-line react/forbid-prop-types
 };
