@@ -1,8 +1,9 @@
 import React from 'react';
-import './DontHaveLists.css';
+import PropTypes from 'prop-types';
 import AppHeader from '../../containers/AppHeader';
+import './DontHaveLists.css';
 
-const DontHaveLists = () => (
+const DontHaveLists = ({onCreateClick}) => (
   <div className="DontHaveLists-container align-middle">
     <AppHeader label="Crie uma lista" />
     <i className="material-icons align-middle">playlist_add</i>
@@ -12,6 +13,7 @@ const DontHaveLists = () => (
     <button
       onClick={() => {
         document.querySelector('.AppInput-container > textarea').focus();
+        onCreateClick();
       }}
       type="button"
       className="btn btn-outline-primary"
@@ -20,5 +22,9 @@ const DontHaveLists = () => (
     </button>
   </div>
 );
+
+DontHaveLists.propTypes = {
+  onCreateClick: PropTypes.func.isRequired
+}
 
 export default DontHaveLists;

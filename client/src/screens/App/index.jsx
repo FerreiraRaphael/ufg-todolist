@@ -1,5 +1,8 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { logout } from '../../modules/auth';
+import { expandLeftSideBar } from '../../modules/app';
 import App from './App';
 
 const mapStateToProps = ({
@@ -14,4 +17,13 @@ const mapStateToProps = ({
   rightSideBar: app.rightSideBar
 });
 
-export default withRouter(connect(mapStateToProps)(App));
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      logout,
+      expandLeftSideBar
+    },
+    dispatch
+  );
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
