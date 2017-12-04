@@ -129,7 +129,7 @@ export default (state = initialState, action) => {
         ...state,
         lists: [
           ...state.lists.slice(0, index),
-          action.result,
+          { ...state.lists[index], ...action.result },
           ...state.lists.slice(index + 1)
         ]
       };
@@ -291,15 +291,15 @@ export const deleteList = id => (dispatch, getState) =>
   });
 
 const editing = () => ({
-  type: DELETE_LIST
+  type: EDIT_LIST
 });
 
 const editingSuccess = () => ({
-  type: DELETE_LIST_SUCCESS
+  type: EDIT_LIST_SUCCESS
 });
 
 const editingFail = () => ({
-  type: DELETE_LIST_FAIL
+  type: EDIT_LIST_FAIL
 });
 
 export const editList = list => (dispatch, getState) =>
@@ -308,16 +308,14 @@ export const editList = list => (dispatch, getState) =>
     try {
       const userId = getState().auth.user.id;
       const selectedId = getState().list.selectedList.id;
-      const { id, title } = list;
+      const { id, ...body } = list;
       const response = await PUT({
         url: `/api/user/${userId}/list/${id}`,
         auth: {
           token: localStorage.token,
           userid: localStorage.userid
         },
-        body: {
-          title
-        }
+        body
       });
       dispatch(editingSuccess());
       dispatch(changeList(list));

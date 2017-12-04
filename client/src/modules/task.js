@@ -129,7 +129,7 @@ export default (state = initialState, action) => {
         ...state,
         tasks: [
           ...state.tasks.slice(0, index),
-          action.result,
+          { ...state.tasks[index], ...action.result },
           ...state.tasks.slice(index + 1)
         ]
       };

@@ -15,6 +15,10 @@
 .ListItem-container.selected {
   background-color: #e9ebeb;
 }
+.ListItem-container .MoreOptions-menu {
+  margin: 0;
+}
+
 .ListItem-task-progress {
   width: 30px;
   height: 30px;
@@ -32,7 +36,8 @@
   color: black;
 }
 .ListItem-controls {
-  width: 40px;
+  display: flex;
+  align-items: center;
 }
 .ListItem-task-number {
   position: absolute;
