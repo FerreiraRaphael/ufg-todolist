@@ -2,7 +2,13 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { logout } from '../../modules/auth';
-import { expandLeftSideBar, collapseRightSideBar } from '../../modules/app';
+import { fetchActivities } from '../../modules/activity';
+import {
+  expandLeftSideBar,
+  collapseRightSideBar,
+  toggleLeftBar,
+  toggleRightBar
+} from '../../modules/app';
 import App from './App';
 
 const mapStateToProps = ({
@@ -21,7 +27,10 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       logout,
+      fetchActivities,
       expandLeftSideBar,
+      toggleLeftBar,
+      toggleRightBar,
       collapseRightSideBar
     },
     dispatch

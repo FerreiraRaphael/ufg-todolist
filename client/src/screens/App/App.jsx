@@ -7,10 +7,10 @@ import {
   RightSideBarHeader,
   LeftSideBar,
   LeftSideBarHeader,
+  AppMainHeader,
   AppMain
 } from '../../components/App';
 import DontHaveLists from '../../components/DontHaveLists';
-import AppHeader from '../../containers/AppHeader';
 import ListsContainer from '../../containers/ListsContainer';
 import ActivitiesContainer from '../../containers/ActivitiesContainer';
 import TasksContainer from '../../containers/TasksContainer';
@@ -22,11 +22,14 @@ const AppScreen = ({
   user,
   selectedList,
   haveLists,
+  fetchActivities,
   leftSideBar,
   rightSideBar,
   logout,
   expandLeftSideBar,
-  collapseRightSideBar
+  collapseRightSideBar,
+  toggleLeftBar,
+  toggleRightBar
 }) => (
   <AppPanel>
     <LeftSideBar open={leftSideBar}>
@@ -36,17 +39,37 @@ const AppScreen = ({
     </LeftSideBar>
     {haveLists ? (
       <AppMain>
-        <AppHeader label={selectedList ? selectedList.title : ''} />
+        <AppMainHeader
+          label={selectedList ? selectedList.title : ''}
+          onLeftControlClick={toggleLeftBar}
+          onRightControlClick={() => {
+            if (!rightSideBar) {
+              fetchActivities(selectedList.id);
+            }
+            toggleRightBar();
+          }}
+        />
         <Route path="/app/list/:listId" component={TasksContainer} />
         <TaskInput />
       </AppMain>
     ) : (
-      <DontHaveLists onCreateClick={expandLeftSideBar} />
+      <div>
+        <AppMainHeader
+          label="Crie uma lista"
+          onLeftControlClick={toggleLeftBar}
+          onRightControlClick={toggleRightBar}
+          showInfoControls={false}
+        />
+        <DontHaveLists onCreateClick={expandLeftSideBar} />
+      </div>
     )}
     <RightSideBar open={rightSideBar}>
       <RightSideBarHeader
         label="Atividades"
         onCloseClick={collapseRightSideBar}
+        onUpdateClick={() => {
+          fetchActivities(selectedList.id);
+        }}
       />
       <ActivitiesContainer />
     </RightSideBar>
@@ -65,8 +88,11 @@ AppScreen.propTypes = {
   selectedList: PropTypes.shape(listSchema),
   haveLists: PropTypes.bool.isRequired,
   leftSideBar: PropTypes.bool.isRequired,
+  fetchActivities: PropTypes.func.isRequired,
   expandLeftSideBar: PropTypes.func.isRequired,
   collapseRightSideBar: PropTypes.func.isRequired,
+  toggleLeftBar: PropTypes.func.isRequired,
+  toggleRightBar: PropTypes.func.isRequired,
   rightSideBar: PropTypes.bool.isRequired,
   logout: PropTypes.func.isRequired
 };
