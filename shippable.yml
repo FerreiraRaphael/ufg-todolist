@@ -29,8 +29,7 @@ env:
     - MOCHA_CONFIG=$CONFIG_LOC/mocha.ci.opts
     - ISTANBUL_CONFIG=$CONFIG_LOC/istanbul.ci.yml
     - COVERALLS_SERVICE_NAME=shippable
-    - CODECLIMATE_API_HOST=https://codebeat.co/webhooks/code_coverage
-    - secure: GUNUJIZREf4QviW8+WRcI8NVDFZb0q4Mlk6bQDsdFLHwjIrQ47R0ISh9PsmEEwjxtdxWWwBSj0pj4WMxxePnYBMYOw8ps2eKu0P6eNyI4tD4ul0SnTlqW25rCxwaxNAKWfjX9d5u22P8CUSvm06IetKSiKWIClzPH1Yy44updWaxujtWIrj7J3bLW049U9G1hIJWGG45l+IeB5X0wAODwYRoODSABAZVGAFaufOMomIQW9s2md4rhHoA81z2gI9NebNLdFNS2RnH8078xo5tTuxxUyDTaeCCdoybqL5Sn1AgQ8vlDElez5NtmZjPrB4hGzWpJ3QXtR1weEu97lMyKA==
+    - secure: i0fVg34mjApuR9Ex7Bzv4cTKuii0FI55YXob3DbVvtQWA9WPTzfX5bUdTUmsGVKtjrQuJFIURPf0nnyHZpbHbKglEmonI24yFFo860kqRRYZLeFd7TsWUt+oQtoCHifxCxAM6XaL1RIN8794KIPIDXSpTSPKrMBPEdjBMkXWJY5XxibEBZnWo/Lv2yqNNlDVqYgh3kpIZiRVOIDxc9vTCn0b5LmeF7nzFUXTYGgklIyrJE9sYiNSFQzv4Ons3b6ne+DUMR5ALNLYPlWkrCqqBcD3xWTnO1SQ+SA6bEB0tlhEHf7kJ76J5tPK3xMpKo6gubC9QdcZcb/92h0y3pTG2Q==
 
 build:
 
@@ -48,10 +47,7 @@ build:
     - pushd $TESTS_LOC_DIR
     - npm run test:coverage
     - npm run report:coverage -- --report-dir $CODE_COVERAGE_DIR --reporter lcovonly
-    - cat $CODE_COVERAGE_DIR/lcov.info
-    - cat $CODE_COVERAGE_DIR/lcov.info | $MOD_LOC/codacy-coverage
     - cat $CODE_COVERAGE_DIR/lcov.info | $SHIPPABLE_REPO_DIR/node_modules/coveralls/bin/coveralls.js
-    - $MOD_LOC/codeclimate-test-reporter < $CODE_COVERAGE_DIR/lcov.info
     - popd
 
 
