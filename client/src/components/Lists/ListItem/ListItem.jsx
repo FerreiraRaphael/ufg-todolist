@@ -18,11 +18,10 @@ class ListItem extends React.Component {
       title,
       id,
       selected,
-      onEdit,
       onDelete,
       collapseLeftSideBar,
       history,
-      editList,
+      editList
     } = this.props;
     const { value, editing } = this.state;
     return (
@@ -108,7 +107,7 @@ class ListItem extends React.Component {
                 }}
                 tabIndex={0}
                 onKeyPress={event => {
-                  if (event.key === 'Enter') onEdit(id);
+                  if (event.key === 'Enter') this.setState({ editing: true });
                 }}
               >
                 Editar

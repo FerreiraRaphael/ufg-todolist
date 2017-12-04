@@ -8,7 +8,7 @@ const ListItemContainer = ({
   title,
   selected,
   onDelete,
-  onEdit,
+  editList,
   history,
   collapseLeftSideBar
 }) => (
@@ -17,7 +17,7 @@ const ListItemContainer = ({
     title={title}
     selected={selected}
     onDelete={onDelete}
-    onEdit={onEdit}
+    editList={editList}
     onClick={() => {
       collapseLeftSideBar();
       history.push(`/app/list/${id}`);
@@ -33,7 +33,7 @@ ListItemContainer.propTypes = {
   ...listSchema,
   selected: PropTypes.bool,
   onDelete: PropTypes.func.isRequired,
-  onEdit: PropTypes.func.isRequired,
+  editList: PropTypes.func.isRequired,
   collapseLeftSideBar: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   onClick: PropTypes.func.isRequired

@@ -33,9 +33,6 @@ class TasksContainer extends React.Component {
         tasks={tasks}
         loading={fetching}
         onDelete={deleteTask}
-        onEdit={id => {
-          console.log(id);
-        }}
         onTaskToggle={editTask}
       />
     );
