@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom';
 import {
   AppPanel,
   RightSideBar,
+  RightSideBarHeader,
   LeftSideBar,
   LeftSideBarHeader,
   AppMain
@@ -11,6 +12,7 @@ import {
 import DontHaveLists from '../../components/DontHaveLists';
 import AppHeader from '../../containers/AppHeader';
 import ListsContainer from '../../containers/ListsContainer';
+import ActivitiesContainer from '../../containers/ActivitiesContainer';
 import TasksContainer from '../../containers/TasksContainer';
 import ListInput from '../../containers/ListInput';
 import TaskInput from '../../containers/TaskInput';
@@ -23,7 +25,8 @@ const AppScreen = ({
   leftSideBar,
   rightSideBar,
   logout,
-  expandLeftSideBar
+  expandLeftSideBar,
+  collapseRightSideBar
 }) => (
   <AppPanel>
     <LeftSideBar open={leftSideBar}>
@@ -41,7 +44,11 @@ const AppScreen = ({
       <DontHaveLists onCreateClick={expandLeftSideBar} />
     )}
     <RightSideBar open={rightSideBar}>
-      <div />
+      <RightSideBarHeader
+        label="Atividades"
+        onCloseClick={collapseRightSideBar}
+      />
+      <ActivitiesContainer />
     </RightSideBar>
   </AppPanel>
 );
@@ -59,6 +66,7 @@ AppScreen.propTypes = {
   haveLists: PropTypes.bool.isRequired,
   leftSideBar: PropTypes.bool.isRequired,
   expandLeftSideBar: PropTypes.func.isRequired,
+  collapseRightSideBar: PropTypes.func.isRequired,
   rightSideBar: PropTypes.bool.isRequired,
   logout: PropTypes.func.isRequired
 };
