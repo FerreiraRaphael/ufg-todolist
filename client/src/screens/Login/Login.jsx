@@ -17,8 +17,22 @@ const LoginScreen = () => (
       </div>
     </div>
     <div className="Login-footer rounded-bottom">
-      <h3>Este é o footer</h3>
-      <div />
+      <p>
+        Criado por{' '}
+        <a href="https://github.com/FerreiraRaphael">Raphael Ferreira</a> e{' '}
+        <a href="https://github.com/guicaixeta">Guilherme Caixeta</a> para a
+        materia de Construção de Software na{' '}
+        <a href="https://www.ufg.br/">UFG</a> 2017/2
+      </p>
+      <p>
+        A documentação pode ser encontrada em <a href="/docs">aqui</a>
+      </p>
+      <p>
+        A documentação da API pode ser encontrada{' '}
+        <a href="https://app.swaggerhub.com/apis/FerreiraRaphael/ufg-todolist/1.0.0">
+          aqui
+        </a>
+      </p>
     </div>
   </div>
 );

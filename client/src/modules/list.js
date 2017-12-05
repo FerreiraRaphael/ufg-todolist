@@ -1,8 +1,10 @@
+/** @module client/modules/list */
 import { GET, POST, DELETE, PUT } from '../lib/request';
 
 /**
  * Actions
  */
+
 const FETCH_LISTS = 'lists/FETCH_LISTS';
 const FETCH_LISTS_SUCCESS = 'lists/FETCH_LISTS_SUCCESS';
 const FETCH_LISTS_FAIL = 'lists/FETCH_LISTS_FAIL';
@@ -19,7 +21,24 @@ const ADD_LISTS = 'lists/ADD_LISTS';
 const CHANGE_LIST = 'lists/CHANGE_LIST';
 const REMOVE_LIST = 'lists/REMOVE_LIST';
 const SELECT_LIST = 'lists/SELECT_LIST';
+const FILTER_BY_ARCHIVED = 'lists/FILTER_BY_ARCHIVED';
+const FILTER_BY_UNARCHIVED = 'lists/FILTER_BY_UNARCHIVED';
+const FILTER_BY_ALL = 'lists/FILTER_BY_ALL';
 
+/**
+ * @namespace List Estado da aplicação que envolve as Listas
+ * @property {boolean} fetching Indicador de que está buscando listas
+ * @property {Object} fetchingError Erros ao buscar listas
+ * @property {boolean} creating Indicador de que está criando listas
+ * @property {Object} creatingError Erros ao criar listas
+ * @property {boolean} editing Indicador de que está editando listas
+ * @property {Object} editingError Erros ao editar listas
+ * @property {boolean} deleting Indicador de que está deletando listas
+ * @property {Object} deletingError Erros ao deletar listas
+ * @property {module:api/models/list~List[]} lists Array das listas na aplicação
+ * @property {string} filter Filtro que está sendo usado na lista de listas
+ * @property {module:api/models/list~List} selectedList Lista selecionada na Aplicação
+ */
 const initialState = {
   fetching: false,
   fetchingError: null,
@@ -30,12 +49,14 @@ const initialState = {
   deleting: false,
   deletingError: null,
   lists: [],
+  filter: 'UNARCHIVED',
   selectedList: null
 };
 
 /**
  * Reducer
  */
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case FETCH_LISTS:
@@ -153,6 +174,24 @@ export default (state = initialState, action) => {
       };
     }
 
+    case FILTER_BY_ALL:
+      return {
+        ...state,
+        filter: 'ALL'
+      };
+
+    case FILTER_BY_UNARCHIVED:
+      return {
+        ...state,
+        filter: 'UNARCHIVED'
+      };
+
+    case FILTER_BY_ARCHIVED:
+      return {
+        ...state,
+        filter: 'ARCHIVED'
+      };
+
     default:
       return state;
   }
@@ -162,40 +201,113 @@ export default (state = initialState, action) => {
  * Action Creators
  */
 
+/**
+ * Ação muda filtro para todos
+ * @function filterByAll
+ * @return {Object} Objeto Ação do tipo FILTER_BY_ALL
+ */
+export const filterByAll = () => ({
+  type: FILTER_BY_ALL
+});
+
+/**
+ * Ação muda filtro para arquivados
+ * @function filterByArchived
+ * @return {Object} Objeto Ação do tipo FILTER_BY_ARCHIVED
+ */
+export const filterByArchived = () => ({
+  type: FILTER_BY_ARCHIVED
+});
+
+/**
+ * Ação muda filtro para não arquivados
+ * @function filterByUnarchived
+ * @return {Object} Objeto Ação do tipo FILTER_BY_UNARCHIVED
+ */
+export const filterByUnarchived = () => ({
+  type: FILTER_BY_UNARCHIVED
+});
+
+/**
+ * Ação adiciona uma lista para as listas
+ * @function addLists
+ * @param {module:api/models/list~List} lists Lista a ser adicionada
+ * @return {Object} Objeto Ação do tipo ADD_LISTS
+ */
 const addLists = lists => ({
   type: ADD_LISTS,
   result: lists
 });
 
+/**
+ * Ação edita uma lista
+ * @function changeList
+ * @param {module:api/models/list~List} list Lista a ser mudada
+ * @return {Object} Objeto Ação do tipo CHANGE_LIST
+ */
 const changeList = list => ({
   type: CHANGE_LIST,
   result: list
 });
 
-const removeList = list => ({
+/**
+ * Ação remove uma lista
+ * @function removeList
+ * @param {string} listId ID da Lista a ser removida
+ * @return {Object} Objeto Ação do tipo REMOVE_LIST
+ */
+const removeList = listId => ({
   type: REMOVE_LIST,
-  result: list
+  result: listId
 });
 
-export const selectList = list => ({
+/**
+ * Seleciona uma lista na aplicação
+ * @function selectList
+ * @param {string} listId ID da Lista a ser selecionada
+ * @return {Object} Objeto Ação do tipo SELECT_LIST
+ */
+export const selectList = listId => ({
   type: SELECT_LIST,
-  result: list
+  result: listId
 });
 
+/**
+ * Ação indica que listas estão sendo buscadas
+ * @function fetching
+ * @return {Object} Objeto Ação do tipo FETCH_LISTS
+ */
 const fetching = () => ({
   type: FETCH_LISTS
 });
 
+/**
+ * Ação indica que listas foram buscadas com sucesso e
+ * adiciona listas vindas do server no estado da aplicação
+ * @function fetchingSuccess
+ * @param {module:api/models/list~List[]} lists Listas buscadas
+ * @return {Object} Objeto Ação do tipo FETCH_LISTS_SUCCESS
+ */
 const fetchingSuccess = lists => ({
   type: FETCH_LISTS_SUCCESS,
   result: lists
 });
 
+/**
+ * Ação indica que ouve um erro ao buscar as listas
+ * @function fetchingError
+ * @param {object} error Erro da Api
+ * @return {Object} Objeto Ação do tipo FETCH_LISTS_FAIL
+ */
 const fetchingError = error => ({
   type: FETCH_LISTS_FAIL,
   result: error
 });
 
+/**
+ * Função busca as listas do usuário logado
+ * @function fetchLists
+ */
 export const fetchLists = () => (dispatch, getState) =>
   new Promise(async (resolve, reject) => {
     dispatch(fetching());
@@ -217,18 +329,39 @@ export const fetchLists = () => (dispatch, getState) =>
     }
   });
 
+/**
+ * Ação indica que lista está sendo criada
+ * @function creating
+ * @return {Object} Objeto Ação do tipo CREATE_LIST
+ */
 const creating = () => ({
   type: CREATE_LIST
 });
 
+/**
+ * Ação indica que lista foi criada com sucesso
+ * @function creatingSuccess
+ * @return {Object} Objeto Ação do tipo CREATE_LIST_SUCCESS
+ */
 const creatingSuccess = () => ({
   type: CREATE_LIST_SUCCESS
 });
 
+/**
+ * Ação indica que houve um erro ao criar a lista
+ * @function creatingFail
+ * @return {Object} Objeto Ação do tipo CREATE_LIST_FAIL
+ */
 const creatingFail = () => ({
   type: CREATE_LIST_FAIL
 });
 
+/**
+ * Criar uma lista para o usuário logado
+ * @function create
+ * @param {object} body Corpo da requisição
+ * @param {object} body.title Titulo da lista
+ */
 export const create = ({ title }) => (dispatch, getState) =>
   new Promise(async (resolve, reject) => {
     dispatch(creating());
@@ -252,18 +385,38 @@ export const create = ({ title }) => (dispatch, getState) =>
     }
   });
 
+/**
+ * Ação indica que lista está sendo deletada
+ * @function deleting
+ * @return {Object} Objeto Ação do tipo DELETE_LIST
+ */
 const deleting = () => ({
   type: DELETE_LIST
 });
 
+/**
+ * Ação indica que lista foi deletada com sucesso
+ * @function deletingSuccess
+ * @return {Object} Objeto Ação do tipo DELETE_LIST_SUCCESS
+ */
 const deletingSuccess = () => ({
   type: DELETE_LIST_SUCCESS
 });
 
+/**
+ * Ação indica que houve um erro ao deletar lista
+ * @function deletingFail
+ * @return {Object} Objeto Ação do tipo DELETE_LIST_FAIL
+ */
 const deletingFail = () => ({
   type: DELETE_LIST_FAIL
 });
 
+/**
+ * Deleta lista dado um id de uma lista
+ * @function deleteList
+ * @param  {string} id ID da lista a ser deletada
+ */
 export const deleteList = id => (dispatch, getState) =>
   new Promise(async (resolve, reject) => {
     dispatch(deleting());
@@ -290,18 +443,40 @@ export const deleteList = id => (dispatch, getState) =>
     }
   });
 
+/**
+ * Ação indica que lista está sendo editada
+ * @function editing
+ * @return {Object} Objeto Ação do tipo EDIT_LIST
+ */
 const editing = () => ({
   type: EDIT_LIST
 });
 
+/**
+ * Ação indica que lista foi editada com sucesso
+ * @function editingSuccess
+ * @return {Object} Objeto Ação do tipo EDIT_LIST_SUCCESS
+ */
 const editingSuccess = () => ({
   type: EDIT_LIST_SUCCESS
 });
 
-const editingFail = () => ({
-  type: EDIT_LIST_FAIL
+/**
+ * Ação indica que houve um erro ao editar lista
+ * @function editingFail
+ * @param {object} error Objeto de erro da api
+ * @return {Object} Objeto Ação do tipo EDIT_LIST_FAIL
+ */
+const editingFail = error => ({
+  type: EDIT_LIST_FAIL,
+  result: error
 });
 
+/**
+ * Edita uma lista e salva a mesma nas listas do estado da splicação
+ * @function editList
+ * @param {module:api/models/list~List} list Objeto de lista a ser editado
+ */
 export const editList = list => (dispatch, getState) =>
   new Promise(async (resolve, reject) => {
     dispatch(editing());

@@ -1,0 +1,11 @@
+.Filter-container {
+  display: flex;
+  align-items: center;
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
+  background: white;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.Filter-controls .show > .MoreOptions-dropdown {
+  transform: translate3d(70px, 35px, 0px) scale(1);
+}

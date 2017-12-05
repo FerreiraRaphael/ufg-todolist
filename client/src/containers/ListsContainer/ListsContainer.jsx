@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Lists from '../../components/Lists';
 import { listSchema } from '../../schemas';
+import { filters } from '../../lib/helpers';
 
 class ListsContainer extends React.Component {
   async componentDidMount() {
@@ -20,10 +21,17 @@ class ListsContainer extends React.Component {
   }
 
   render() {
-    const { lists, fetching, selectedList, deleteList, editList } = this.props;
+    const {
+      lists,
+      fetching,
+      selectedList,
+      deleteList,
+      editList,
+      filter
+    } = this.props;
     return (
       <Lists
-        lists={lists}
+        lists={lists.filter(filters[filter])}
         loading={fetching}
         selectedList={selectedList}
         onDelete={deleteList}
@@ -45,6 +53,7 @@ ListsContainer.propTypes = {
   fetching: PropTypes.bool,
   fetchLists: PropTypes.func.isRequired,
   selectedList: PropTypes.shape(listSchema),
+  filter: PropTypes.string.isRequired,
   lists: PropTypes.arrayOf(PropTypes.shape(listSchema)).isRequired,
   history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   location: PropTypes.object.isRequired, // eslint-disable-line

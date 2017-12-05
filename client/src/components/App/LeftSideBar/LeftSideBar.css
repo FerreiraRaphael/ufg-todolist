@@ -5,12 +5,16 @@
   flex-direction: column;
 }
 
+.LeftSideBar-container .Filter-container {
+  border-right: 0;
+}
+
 @media (max-width: 576px) {
   .LeftSideBar-container {
     width: 100%;
     left: -100%;
     position: absolute;
-    transition: all .1s ease;
+    transition: all 0.1s ease;
     z-index: 1;
   }
 }

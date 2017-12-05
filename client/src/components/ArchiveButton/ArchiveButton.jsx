@@ -13,6 +13,7 @@ const ArchiveButton = ({ archived, onClick }) => (
     role="button"
     tabIndex={-1}
     className="ArchiveButton-container"
+    style={{margin: '0 8px'}}
   >
     <i className="material-icons">{archived ? 'unarchive' : 'archive'}</i>
   </div>

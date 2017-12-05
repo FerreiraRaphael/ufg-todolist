@@ -1,5 +1,14 @@
+/** @module api/models/user */
+
 const bcrypt = require('bcrypt');
 
+/**
+ * Modelo de Usuário
+ * @typedef {Object} User
+ * @property {string} username Nome de usuário
+ * @property {string} password Senha do Usuário
+ * @property {DATE} lastLogout Ultima vez que usuário saiu do sistema
+ */
 module.exports = (sequelize, { STRING, DATE }) => {
   const User = sequelize.define('User', {
     username: STRING,
