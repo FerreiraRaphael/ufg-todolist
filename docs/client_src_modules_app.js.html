@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>client/src/modules/app.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-api_helpers.html">api/helpers</a><ul class='methods'><li data-type='method'><a href="module-api_helpers.html#~ApiError">ApiError</a></li></ul></li><li><a href="module-api_models_activity.html">api/models/activity</a></li><li><a href="module-api_models_list.html">api/models/list</a></li><li><a href="module-api_models_task.html">api/models/task</a></li><li><a href="module-api_models_user.html">api/models/user</a></li><li><a href="module-client_modules_activity.html">client/modules/activity</a><ul class='methods'><li data-type='method'><a href="module-client_modules_activity.html#~fetchActivities">fetchActivities</a></li><li data-type='method'><a href="module-client_modules_activity.html#~fetching">fetching</a></li><li data-type='method'><a href="module-client_modules_activity.html#~fetchingError">fetchingError</a></li><li data-type='method'><a href="module-client_modules_activity.html#~fetchingSuccess">fetchingSuccess</a></li></ul></li><li><a href="module-client_modules_app.html">client/modules/app</a><ul class='methods'><li data-type='method'><a href="module-client_modules_app.html#~collapseLeftSideBar">collapseLeftSideBar</a></li><li data-type='method'><a href="module-client_modules_app.html#~collapseRightSideBar">collapseRightSideBar</a></li><li data-type='method'><a href="module-client_modules_app.html#~expandLeftSideBar">expandLeftSideBar</a></li><li data-type='method'><a href="module-client_modules_app.html#~expandRightSideBar">expandRightSideBar</a></li><li data-type='method'><a href="module-client_modules_app.html#~toggleLeftBar">toggleLeftBar</a></li><li data-type='method'><a href="module-client_modules_app.html#~toggleRightBar">toggleRightBar</a></li></ul></li><li><a href="module-client_modules_auth.html">client/modules/auth</a><ul class='methods'><li data-type='method'><a href="module-client_modules_auth.html#~loading">loading</a></li><li data-type='method'><a href="module-client_modules_auth.html#~loadingFail">loadingFail</a></li><li data-type='method'><a href="module-client_modules_auth.html#~loadingSuccess">loadingSuccess</a></li><li data-type='method'><a href="module-client_modules_auth.html#~loadUser">loadUser</a></li><li data-type='method'><a href="module-client_modules_auth.html#~logginError">logginError</a></li><li data-type='method'><a href="module-client_modules_auth.html#~logginIn">logginIn</a></li><li data-type='method'><a href="module-client_modules_auth.html#~logginIn">logginIn</a></li><li data-type='method'><a href="module-client_modules_auth.html#~logginOut">logginOut</a></li><li data-type='method'><a href="module-client_modules_auth.html#~login">login</a></li><li data-type='method'><a href="module-client_modules_auth.html#~logout">logout</a></li><li data-type='method'><a href="module-client_modules_auth.html#~logoutSuccess">logoutSuccess</a></li><li data-type='method'><a href="module-client_modules_auth.html#~signingUp">signingUp</a></li><li data-type='method'><a href="module-client_modules_auth.html#~signingUpFail">signingUpFail</a></li><li data-type='method'><a href="module-client_modules_auth.html#~signingUpSuccess">signingUpSuccess</a></li><li data-type='method'><a href="module-client_modules_auth.html#~signUp">signUp</a></li></ul></li><li><a href="module-client_modules_list.html">client/modules/list</a><ul class='methods'><li data-type='method'><a href="module-client_modules_list.html#~addLists">addLists</a></li><li data-type='method'><a href="module-client_modules_list.html#~changeList">changeList</a></li><li data-type='method'><a href="module-client_modules_list.html#~create">create</a></li><li data-type='method'><a href="module-client_modules_list.html#~creating">creating</a></li><li data-type='method'><a href="module-client_modules_list.html#~creatingFail">creatingFail</a></li><li data-type='method'><a href="module-client_modules_list.html#~creatingSuccess">creatingSuccess</a></li><li data-type='method'><a href="module-client_modules_list.html#~deleteList">deleteList</a></li><li data-type='method'><a href="module-client_modules_list.html#~deleting">deleting</a></li><li data-type='method'><a href="module-client_modules_list.html#~deletingFail">deletingFail</a></li><li data-type='method'><a href="module-client_modules_list.html#~deletingSuccess">deletingSuccess</a></li><li data-type='method'><a href="module-client_modules_list.html#~editing">editing</a></li><li data-type='method'><a href="module-client_modules_list.html#~editingFail">editingFail</a></li><li data-type='method'><a href="module-client_modules_list.html#~editingSuccess">editingSuccess</a></li><li data-type='method'><a href="module-client_modules_list.html#~editList">editList</a></li><li data-type='method'><a href="module-client_modules_list.html#~fetching">fetching</a></li><li data-type='method'><a href="module-client_modules_list.html#~fetchingError">fetchingError</a></li><li data-type='method'><a href="module-client_modules_list.html#~fetchingSuccess">fetchingSuccess</a></li><li data-type='method'><a href="module-client_modules_list.html#~fetchLists">fetchLists</a></li><li data-type='method'><a href="module-client_modules_list.html#~filterByAll">filterByAll</a></li><li data-type='method'><a href="module-client_modules_list.html#~filterByArchived">filterByArchived</a></li><li data-type='method'><a href="module-client_modules_list.html#~filterByUnarchived">filterByUnarchived</a></li><li data-type='method'><a href="module-client_modules_list.html#~removeList">removeList</a></li><li data-type='method'><a href="module-client_modules_list.html#~selectList">selectList</a></li></ul></li><li><a href="module-client_modules_task.html">client/modules/task</a><ul class='methods'><li data-type='method'><a href="module-client_modules_task.html#~addLists">addLists</a></li><li data-type='method'><a href="module-client_modules_task.html#~changeTask">changeTask</a></li><li data-type='method'><a href="module-client_modules_task.html#~changeTask">changeTask</a></li><li data-type='method'><a href="module-client_modules_task.html#~create">create</a></li><li data-type='method'><a href="module-client_modules_task.html#~creating">creating</a></li><li data-type='method'><a href="module-client_modules_task.html#~creatingFail">creatingFail</a></li><li data-type='method'><a href="module-client_modules_task.html#~creatingSuccess">creatingSuccess</a></li><li data-type='method'><a href="module-client_modules_task.html#~deleteTask">deleteTask</a></li><li data-type='method'><a href="module-client_modules_task.html#~deleting">deleting</a></li><li data-type='method'><a href="module-client_modules_task.html#~deletingFail">deletingFail</a></li><li data-type='method'><a href="module-client_modules_task.html#~deletingSuccess">deletingSuccess</a></li><li data-type='method'><a href="module-client_modules_task.html#~editing">editing</a></li><li data-type='method'><a href="module-client_modules_task.html#~editingError">editingError</a></li><li data-type='method'><a href="module-client_modules_task.html#~editingSuccess">editingSuccess</a></li><li data-type='method'><a href="module-client_modules_task.html#~editTask">editTask</a></li><li data-type='method'><a href="module-client_modules_task.html#~fetching">fetching</a></li><li data-type='method'><a href="module-client_modules_task.html#~fetchingError">fetchingError</a></li><li data-type='method'><a href="module-client_modules_task.html#~fetchingSuccess">fetchingSuccess</a></li><li data-type='method'><a href="module-client_modules_task.html#~fetchTasks">fetchTasks</a></li><li data-type='method'><a href="module-client_modules_task.html#~filterByAll">filterByAll</a></li><li data-type='method'><a href="module-client_modules_task.html#~filterByArchived">filterByArchived</a></li><li data-type='method'><a href="module-client_modules_task.html#~filterByDone">filterByDone</a></li><li data-type='method'><a href="module-client_modules_task.html#~filterByUnarchived">filterByUnarchived</a></li><li data-type='method'><a href="module-client_modules_task.html#~filterByUndone">filterByUndone</a></li></ul></li></ul><h3>Namespaces</h3><ul><li><a href="module-client_modules_activity-Activity%2520Estado%2520da%2520aplica%25C3%25A7%25C3%25A3o%2520que%2520envolve%2520as%2520Atividades.html">Activity Estado da aplicação que envolve as Atividades</a></li><li><a href="module-client_modules_app-App%2520Estado%2520da%2520aplica%25C3%25A7%25C3%25A3o%2520que%2520envolve%2520o%2520App.html">App Estado da aplicação que envolve o App</a></li><li><a href="module-client_modules_auth-Auth%2520Estado%2520da%2520aplica%25C3%25A7%25C3%25A3o%2520que%2520envolve%2520a%2520Autentica%25C3%25A7%25C3%25A3o.html">Auth Estado da aplicação que envolve a Autenticação</a></li><li><a href="module-client_modules_list-List%2520Estado%2520da%2520aplica%25C3%25A7%25C3%25A3o%2520que%2520envolve%2520as%2520Listas.html">List Estado da aplicação que envolve as Listas</a></li><li><a href="module-client_modules_task-Task%2520Estado%2520da%2520aplica%25C3%25A7%25C3%25A3o%2520que%2520envolve%2520as%2520Tarefas.html">Task Estado da aplicação que envolve as Tarefas</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">client/src/modules/app.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** @module client/modules/app */
+/**
+ * Actions
+ */
+
+const EXPAND_LEFT_SIDE_BAR = 'app/EXPAND_LEFT_SIDE_BAR';
+const COLLAPSE_LEFT_SIDE_BAR = 'app/COLLAPSE_LEFT_SIDE_BAR';
+const EXPAND_RIGHT_SIDE_BAR = 'app/EXPAND_RIGHT_SIDE_BAR';
+const COLLAPSE_RIGHT_SIDE_BAR = 'app/COLLAPSE_RIGHT_SIDE_BAR';
+
+/**
+ * @namespace App Estado da aplicação que envolve o App
+ * @property {boolean} leftSideBar Indicador de que sideBar esquerda está aberta
+ * @property {boolean} rightSideBar Indicador de que sideBar direita está aberta
+ */
+const initialState = {
+  leftSideBar: false,
+  rightSideBar: false
+};
+
+/**
+ * Reducer
+ */
+
+export default (state = initialState, action) => {
+  switch (action.type) {
+    case EXPAND_LEFT_SIDE_BAR:
+      return {
+        ...state,
+        rightSideBar: false,
+        leftSideBar: true
+      };
+
+    case COLLAPSE_LEFT_SIDE_BAR:
+      return {
+        ...state,
+        leftSideBar: false
+      };
+
+    case EXPAND_RIGHT_SIDE_BAR:
+      return {
+        ...state,
+        leftSideBar: false,
+        rightSideBar: true
+      };
+
+    case COLLAPSE_RIGHT_SIDE_BAR:
+      return {
+        ...state,
+        rightSideBar: false
+      };
+
+    default:
+      return state;
+  }
+};
+
+/**
+ * Action Creators
+ */
+
+/**
+ * Ação abre side bar esquerda
+ * @function expandLeftSideBar
+ * @return {Object} Objeto Ação do tipo EXPAND_LEFT_SIDE_BAR
+ */
+export const expandLeftSideBar = () => ({
+  type: EXPAND_LEFT_SIDE_BAR
+});
+
+/**
+ * Ação fecha side bar esquerda
+ * @function collapseLeftSideBar
+ * @return {Object} Objeto Ação do tipo COLLAPSE_LEFT_SIDE_BAR
+ */
+export const collapseLeftSideBar = () => ({
+  type: COLLAPSE_LEFT_SIDE_BAR
+});
+
+/**
+ * Ação abre side bar direita
+ * @function expandRightSideBar
+ * @return {Object} Objeto Ação do tipo EXPAND_RIGHT_SIDE_BAR
+ */
+export const expandRightSideBar = () => ({
+  type: EXPAND_RIGHT_SIDE_BAR
+});
+
+/**
+ * Ação fecha side bar direita
+ * @function collapseRightSideBar
+ * @return {Object} Objeto Ação do tipo COLLAPSE_RIGHT_SIDE_BAR
+ */
+export const collapseRightSideBar = () => ({
+  type: COLLAPSE_RIGHT_SIDE_BAR
+});
+
+/**
+ * Abre ou fecha barra esquerda, dependendo do estado anterior
+ * @function toggleLeftBar
+ */
+export const toggleLeftBar = () => (dispatch, getState) => {
+  dispatch(
+    getState().app.leftSideBar ? collapseLeftSideBar() : expandLeftSideBar()
+  );
+};
+
+/**
+ * Abre ou fecha barra direita, dependendo do estado anterior
+ * @function toggleRightBar
+ */
+export const toggleRightBar = () => (dispatch, getState) => {
+  dispatch(
+    getState().app.rightSideBar ? collapseRightSideBar() : expandRightSideBar()
+  );
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Dec 05 2017 14:07:32 GMT-0200 (Horário brasileiro de verão) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

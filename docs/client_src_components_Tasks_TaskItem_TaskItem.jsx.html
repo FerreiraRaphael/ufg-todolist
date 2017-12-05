@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>client/src/components/Tasks/TaskItem/TaskItem.jsx - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-api_helpers.html">api/helpers</a><ul class='methods'><li data-type='method'><a href="module-api_helpers.html#~ApiError">ApiError</a></li></ul></li><li><a href="module-api_models_activity.html">api/models/activity</a></li><li><a href="module-api_models_list.html">api/models/list</a></li><li><a href="module-api_models_task.html">api/models/task</a></li><li><a href="module-api_models_user.html">api/models/user</a></li><li><a href="module-client_modules_activity.html">client/modules/activity</a><ul class='methods'><li data-type='method'><a href="module-client_modules_activity.html#~fetchActivities">fetchActivities</a></li><li data-type='method'><a href="module-client_modules_activity.html#~fetching">fetching</a></li><li data-type='method'><a href="module-client_modules_activity.html#~fetchingError">fetchingError</a></li><li data-type='method'><a href="module-client_modules_activity.html#~fetchingSuccess">fetchingSuccess</a></li></ul></li><li><a href="module-client_modules_app.html">client/modules/app</a><ul class='methods'><li data-type='method'><a href="module-client_modules_app.html#~collapseLeftSideBar">collapseLeftSideBar</a></li><li data-type='method'><a href="module-client_modules_app.html#~collapseRightSideBar">collapseRightSideBar</a></li><li data-type='method'><a href="module-client_modules_app.html#~expandLeftSideBar">expandLeftSideBar</a></li><li data-type='method'><a href="module-client_modules_app.html#~expandRightSideBar">expandRightSideBar</a></li><li data-type='method'><a href="module-client_modules_app.html#~toggleLeftBar">toggleLeftBar</a></li><li data-type='method'><a href="module-client_modules_app.html#~toggleRightBar">toggleRightBar</a></li></ul></li><li><a href="module-client_modules_auth.html">client/modules/auth</a><ul class='methods'><li data-type='method'><a href="module-client_modules_auth.html#~loading">loading</a></li><li data-type='method'><a href="module-client_modules_auth.html#~loadingFail">loadingFail</a></li><li data-type='method'><a href="module-client_modules_auth.html#~loadingSuccess">loadingSuccess</a></li><li data-type='method'><a href="module-client_modules_auth.html#~loadUser">loadUser</a></li><li data-type='method'><a href="module-client_modules_auth.html#~logginError">logginError</a></li><li data-type='method'><a href="module-client_modules_auth.html#~logginIn">logginIn</a></li><li data-type='method'><a href="module-client_modules_auth.html#~logginIn">logginIn</a></li><li data-type='method'><a href="module-client_modules_auth.html#~logginOut">logginOut</a></li><li data-type='method'><a href="module-client_modules_auth.html#~login">login</a></li><li data-type='method'><a href="module-client_modules_auth.html#~logout">logout</a></li><li data-type='method'><a href="module-client_modules_auth.html#~logoutSuccess">logoutSuccess</a></li><li data-type='method'><a href="module-client_modules_auth.html#~signingUp">signingUp</a></li><li data-type='method'><a href="module-client_modules_auth.html#~signingUpFail">signingUpFail</a></li><li data-type='method'><a href="module-client_modules_auth.html#~signingUpSuccess">signingUpSuccess</a></li><li data-type='method'><a href="module-client_modules_auth.html#~signUp">signUp</a></li></ul></li><li><a href="module-client_modules_list.html">client/modules/list</a><ul class='methods'><li data-type='method'><a href="module-client_modules_list.html#~addLists">addLists</a></li><li data-type='method'><a href="module-client_modules_list.html#~changeList">changeList</a></li><li data-type='method'><a href="module-client_modules_list.html#~create">create</a></li><li data-type='method'><a href="module-client_modules_list.html#~creating">creating</a></li><li data-type='method'><a href="module-client_modules_list.html#~creatingFail">creatingFail</a></li><li data-type='method'><a href="module-client_modules_list.html#~creatingSuccess">creatingSuccess</a></li><li data-type='method'><a href="module-client_modules_list.html#~deleteList">deleteList</a></li><li data-type='method'><a href="module-client_modules_list.html#~deleting">deleting</a></li><li data-type='method'><a href="module-client_modules_list.html#~deletingFail">deletingFail</a></li><li data-type='method'><a href="module-client_modules_list.html#~deletingSuccess">deletingSuccess</a></li><li data-type='method'><a href="module-client_modules_list.html#~editing">editing</a></li><li data-type='method'><a href="module-client_modules_list.html#~editingFail">editingFail</a></li><li data-type='method'><a href="module-client_modules_list.html#~editingSuccess">editingSuccess</a></li><li data-type='method'><a href="module-client_modules_list.html#~editList">editList</a></li><li data-type='method'><a href="module-client_modules_list.html#~fetching">fetching</a></li><li data-type='method'><a href="module-client_modules_list.html#~fetchingError">fetchingError</a></li><li data-type='method'><a href="module-client_modules_list.html#~fetchingSuccess">fetchingSuccess</a></li><li data-type='method'><a href="module-client_modules_list.html#~fetchLists">fetchLists</a></li><li data-type='method'><a href="module-client_modules_list.html#~filterByAll">filterByAll</a></li><li data-type='method'><a href="module-client_modules_list.html#~filterByArchived">filterByArchived</a></li><li data-type='method'><a href="module-client_modules_list.html#~filterByUnarchived">filterByUnarchived</a></li><li data-type='method'><a href="module-client_modules_list.html#~removeList">removeList</a></li><li data-type='method'><a href="module-client_modules_list.html#~selectList">selectList</a></li></ul></li><li><a href="module-client_modules_task.html">client/modules/task</a><ul class='methods'><li data-type='method'><a href="module-client_modules_task.html#~addLists">addLists</a></li><li data-type='method'><a href="module-client_modules_task.html#~changeTask">changeTask</a></li><li data-type='method'><a href="module-client_modules_task.html#~changeTask">changeTask</a></li><li data-type='method'><a href="module-client_modules_task.html#~create">create</a></li><li data-type='method'><a href="module-client_modules_task.html#~creating">creating</a></li><li data-type='method'><a href="module-client_modules_task.html#~creatingFail">creatingFail</a></li><li data-type='method'><a href="module-client_modules_task.html#~creatingSuccess">creatingSuccess</a></li><li data-type='method'><a href="module-client_modules_task.html#~deleteTask">deleteTask</a></li><li data-type='method'><a href="module-client_modules_task.html#~deleting">deleting</a></li><li data-type='method'><a href="module-client_modules_task.html#~deletingFail">deletingFail</a></li><li data-type='method'><a href="module-client_modules_task.html#~deletingSuccess">deletingSuccess</a></li><li data-type='method'><a href="module-client_modules_task.html#~editing">editing</a></li><li data-type='method'><a href="module-client_modules_task.html#~editingError">editingError</a></li><li data-type='method'><a href="module-client_modules_task.html#~editingSuccess">editingSuccess</a></li><li data-type='method'><a href="module-client_modules_task.html#~editTask">editTask</a></li><li data-type='method'><a href="module-client_modules_task.html#~fetching">fetching</a></li><li data-type='method'><a href="module-client_modules_task.html#~fetchingError">fetchingError</a></li><li data-type='method'><a href="module-client_modules_task.html#~fetchingSuccess">fetchingSuccess</a></li><li data-type='method'><a href="module-client_modules_task.html#~fetchTasks">fetchTasks</a></li><li data-type='method'><a href="module-client_modules_task.html#~filterByAll">filterByAll</a></li><li data-type='method'><a href="module-client_modules_task.html#~filterByArchived">filterByArchived</a></li><li data-type='method'><a href="module-client_modules_task.html#~filterByDone">filterByDone</a></li><li data-type='method'><a href="module-client_modules_task.html#~filterByUnarchived">filterByUnarchived</a></li><li data-type='method'><a href="module-client_modules_task.html#~filterByUndone">filterByUndone</a></li></ul></li></ul><h3>Namespaces</h3><ul><li><a href="module-client_modules_activity-Activity%2520Estado%2520da%2520aplica%25C3%25A7%25C3%25A3o%2520que%2520envolve%2520as%2520Atividades.html">Activity Estado da aplicação que envolve as Atividades</a></li><li><a href="module-client_modules_app-App%2520Estado%2520da%2520aplica%25C3%25A7%25C3%25A3o%2520que%2520envolve%2520o%2520App.html">App Estado da aplicação que envolve o App</a></li><li><a href="module-client_modules_auth-Auth%2520Estado%2520da%2520aplica%25C3%25A7%25C3%25A3o%2520que%2520envolve%2520a%2520Autentica%25C3%25A7%25C3%25A3o.html">Auth Estado da aplicação que envolve a Autenticação</a></li><li><a href="module-client_modules_list-List%2520Estado%2520da%2520aplica%25C3%25A7%25C3%25A3o%2520que%2520envolve%2520as%2520Listas.html">List Estado da aplicação que envolve as Listas</a></li><li><a href="module-client_modules_task-Task%2520Estado%2520da%2520aplica%25C3%25A7%25C3%25A3o%2520que%2520envolve%2520as%2520Tarefas.html">Task Estado da aplicação que envolve as Tarefas</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">client/src/components/Tasks/TaskItem/TaskItem.jsx</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import PropTypes from 'prop-types';
+import cs from 'classnames';
+import moment from 'moment';
+import { taskSchema } from '../../../schemas';
+import MoreOptions from '../../MoreOptions';
+import ArchiveButton from '../../ArchiveButton';
+import DatePicker from '../../DatePicker';
+import TaskItemInput from './TaskItemInput';
+import './TaskItem.css';
+
+const REFERENCE = moment();
+const TODAY = REFERENCE.clone().startOf('day');
+const YESTERDAY = REFERENCE.clone()
+  .subtract(1, 'days')
+  .startOf('day');
+const TOMORROW = REFERENCE.clone()
+  .add(1, 'days')
+  .startOf('day');
+
+function isToday(momentDate) {
+  return momentDate.isSame(TODAY, 'd');
+}
+function isYesterday(momentDate) {
+  return momentDate.isSame(YESTERDAY, 'd');
+}
+function isTomorrow(momentDate) {
+  return momentDate.isSame(TOMORROW, 'd');
+}
+
+function formatDate(finishDate) {
+  const date = moment(finishDate);
+  const time = date.format('HH:mm');
+  if (isToday(date)) return `Hoje as ${time}`;
+  if (isYesterday(date)) return `Ontem as ${time}`;
+  if (isTomorrow(date)) return `Amanhã as ${time}`;
+  return `${date.format('DD')} de ${date.format('MMMM')} ${date.year() ===
+  moment().year()
+    ? ''
+    : `de ${date.year()}`} as ${time}`;
+}
+
+class TaskItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      editing: false,
+      value: props.title
+    };
+  }
+  render() {
+    const {
+      id,
+      title,
+      done,
+      onDelete,
+      onTaskToggle,
+      editTask,
+      archived,
+      finishDate,
+      onArchiveClick,
+      onDatePick
+    } = this.props;
+    const { value, editing } = this.state;
+    return (
+      &lt;li className={cs('TaskItem-container')}>
+        &lt;TaskItemInput
+          done={done}
+          onChange={checked => {
+            onTaskToggle({ id, title, done: checked });
+          }}
+          disabled={editing}
+        />
+        {editing ? (
+          &lt;input
+            value={value}
+            onChange={event => {
+              this.setState({ value: event.target.value });
+            }}
+            style={{
+              marginLeft: 10,
+              flex: 1,
+              fontSize: 16,
+              outline: '-webkit-focus-ring-color auto 5px'
+            }}
+          />
+        ) : (
+          &lt;div className="TaskItem-title ellipsify">
+            &lt;span className="ellipsify">{title}&lt;/span>
+            {finishDate &amp;&amp; &lt;div className="ellipsify">{formatDate(finishDate)}&lt;/div>}
+          &lt;/div>
+        )}
+        {editing ? (
+          &lt;div style={{ display: 'flex' }}>
+            &lt;div className="MoreOptions-container">
+              &lt;div
+                role="button"
+                onClick={() => {
+                  this.setState({ editing: false });
+                  editTask({ id, title: value, done });
+                }}
+                tabIndex={0}
+                onKeyPress={event => {
+                  if (event.key === 'Enter') {
+                    this.setState({ editing: false });
+                    editTask({ id, title: value, done });
+                  }
+                }}
+                className="rounded-circle MoreOptions-menu"
+                styles={{ margin: 0 }}
+              >
+                &lt;i className="material-icons">check&lt;/i>
+              &lt;/div>
+            &lt;/div>
+            &lt;div
+              role="button"
+              onClick={() => {
+                this.setState({ editing: false, value: title });
+              }}
+              tabIndex={0}
+              onKeyPress={event => {
+                if (event.key === 'Enter') {
+                  this.setState({ editing: false, value: title });
+                }
+              }}
+              className="MoreOptions-container"
+            >
+              &lt;div
+                className="rounded-circle MoreOptions-menu"
+                styles={{ margin: 0 }}
+              >
+                &lt;i className="material-icons">close&lt;/i>
+              &lt;/div>
+            &lt;/div>
+          &lt;/div>
+        ) : (
+          &lt;div className="TaskItem-controls">
+            &lt;DatePicker
+              onChange={date => {
+                onDatePick(date);
+              }}
+              selected={finishDate}
+              locale="pt-BR"
+              showTimeSelect
+              timeFormat="HH:mm"
+              timeIntervals={15}
+              dateFormat="LLL"
+              withPortal
+            />
+            &lt;ArchiveButton
+              onClick={() => {
+                onArchiveClick({ id, archived: !archived });
+              }}
+              archived={archived}
+            />
+            &lt;MoreOptions icon="keyboard_arrow_down">
+              &lt;a
+                role="button"
+                onClick={() => {
+                  this.setState({ editing: true });
+                }}
+                tabIndex={0}
+                onKeyPress={event => {
+                  if (event.key === 'Enter') this.setState({ editing: true });
+                }}
+              >
+                Editar
+              &lt;/a>
+              &lt;a
+                role="button"
+                onClick={() => onDelete(id)}
+                tabIndex={0}
+                onKeyPress={event => {
+                  if (event.key === 'Enter') onDelete(id);
+                }}
+              >
+                Deletar
+              &lt;/a>
+            &lt;/MoreOptions>
+          &lt;/div>
+        )}
+      &lt;/li>
+    );
+  }
+}
+
+TaskItem.defaultProps = {
+  selected: false
+};
+
+TaskItem.propTypes = {
+  ...taskSchema,
+  selected: PropTypes.bool,
+  editTask: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onDatePick: PropTypes.func.isRequired,
+  onArchiveClick: PropTypes.func.isRequired,
+  onTaskToggle: PropTypes.func.isRequired
+};
+
+export default TaskItem;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Dec 05 2017 14:07:32 GMT-0200 (Horário brasileiro de verão) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
