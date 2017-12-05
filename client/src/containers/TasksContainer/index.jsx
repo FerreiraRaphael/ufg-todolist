@@ -8,7 +8,8 @@ import TasksContainer from './TasksContainer';
 const mapStateToProps = ({ task, list }) => ({
   fetching: task.fetching,
   tasks: task.tasks,
-  selectedList: list.selectedList
+  selectedList: list.selectedList,
+  filter: task.filter
 });
 
 const mapDispatchToProps = dispatch =>

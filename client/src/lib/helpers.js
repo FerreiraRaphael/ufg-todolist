@@ -27,3 +27,11 @@ export function transformApiErrors(errors = []) {
     {}
   );
 }
+
+export const filters = {
+  ALL: () => true,
+  UNARCHIVED: item => !item.archived,
+  ARCHIVED: item => item.archived,
+  DONE: item => item.done,
+  UNDONE: item => !item.done
+};

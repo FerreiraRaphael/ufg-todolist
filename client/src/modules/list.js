@@ -19,6 +19,9 @@ const ADD_LISTS = 'lists/ADD_LISTS';
 const CHANGE_LIST = 'lists/CHANGE_LIST';
 const REMOVE_LIST = 'lists/REMOVE_LIST';
 const SELECT_LIST = 'lists/SELECT_LIST';
+const FILTER_BY_ARCHIVED = 'lists/FILTER_BY_ARCHIVED';
+const FILTER_BY_UNARCHIVED = 'lists/FILTER_BY_UNARCHIVED';
+const FILTER_BY_ALL = 'lists/FILTER_BY_ALL';
 
 const initialState = {
   fetching: false,
@@ -30,6 +33,7 @@ const initialState = {
   deleting: false,
   deletingError: null,
   lists: [],
+  filter: 'UNARCHIVED',
   selectedList: null
 };
 
@@ -153,6 +157,24 @@ export default (state = initialState, action) => {
       };
     }
 
+    case FILTER_BY_ALL:
+      return {
+        ...state,
+        filter: 'ALL'
+      };
+
+    case FILTER_BY_UNARCHIVED:
+      return {
+        ...state,
+        filter: 'UNARCHIVED'
+      };
+
+    case FILTER_BY_ARCHIVED:
+      return {
+        ...state,
+        filter: 'ARCHIVED'
+      };
+
     default:
       return state;
   }
@@ -161,6 +183,18 @@ export default (state = initialState, action) => {
 /**
  * Action Creators
  */
+
+export const filterByAll = () => ({
+  type: FILTER_BY_ALL
+});
+
+export const filterByArchived = () => ({
+  type: FILTER_BY_ARCHIVED
+});
+
+export const filterByUnarchived = () => ({
+  type: FILTER_BY_UNARCHIVED
+});
 
 const addLists = lists => ({
   type: ADD_LISTS,

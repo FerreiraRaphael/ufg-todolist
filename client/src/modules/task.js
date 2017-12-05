@@ -18,6 +18,11 @@ const EDIT_TASKS_FAIL = 'tasks/EDIT_TASKS_FAIL';
 const ADD_TASK = 'tasks/ADD_TASK';
 const REMOVE_TASK = 'tasks/REMOVE_TASK';
 const CHANGE_LIST = 'tasks/CHANGE_LIST';
+const FILTER_BY_ARCHIVED = 'tasks/FILTER_BY_ARCHIVED';
+const FILTER_BY_UNARCHIVED = 'tasks/FILTER_BY_UNARCHIVED';
+const FILTER_BY_ALL = 'tasks/FILTER_BY_ALL';
+const FILTER_BY_UNDONE = 'tasks/FILTER_BY_UNDONE';
+const FILTER_BY_DONE = 'tasks/FILTER_BY_DONE';
 
 const initialState = {
   fetching: false,
@@ -28,6 +33,7 @@ const initialState = {
   deletingError: null,
   editing: false,
   editingError: null,
+  filter: 'UNARCHIVED',
   tasks: []
 };
 
@@ -142,6 +148,36 @@ export default (state = initialState, action) => {
       };
     }
 
+    case FILTER_BY_ALL:
+      return {
+        ...state,
+        filter: 'ALL'
+      };
+
+    case FILTER_BY_UNARCHIVED:
+      return {
+        ...state,
+        filter: 'UNARCHIVED'
+      };
+
+    case FILTER_BY_ARCHIVED:
+      return {
+        ...state,
+        filter: 'ARCHIVED'
+      };
+
+    case FILTER_BY_UNDONE:
+      return {
+        ...state,
+        filter: 'UNDONE'
+      };
+
+    case FILTER_BY_DONE:
+      return {
+        ...state,
+        filter: 'DONE'
+      };
+
     default:
       return state;
   }
@@ -150,6 +186,26 @@ export default (state = initialState, action) => {
 /**
  * Action Creators
  */
+
+export const filterByAll = () => ({
+  type: FILTER_BY_ALL
+});
+
+export const filterByArchived = () => ({
+  type: FILTER_BY_ARCHIVED
+});
+
+export const filterByUnarchived = () => ({
+  type: FILTER_BY_UNARCHIVED
+});
+
+export const filterByDone = () => ({
+  type: FILTER_BY_DONE
+});
+
+export const filterByUndone = () => ({
+  type: FILTER_BY_UNDONE
+});
 
 const addTask = task => ({
   type: ADD_TASK,
@@ -289,14 +345,14 @@ export const editTask = task => (dispatch, getState) =>
     try {
       const userId = getState().auth.user.id;
       const { selectedList } = getState().list;
-      const { id, title, done } = task;
+      const { id, ...body } = task;
       const response = await PUT({
         url: `/api/user/${userId}/list/${selectedList.id}/task/${id}`,
         auth: {
           token: localStorage.token,
           userid: localStorage.userid
         },
-        body: { title, done }
+        body
       });
       dispatch(editingSuccess());
       dispatch(changeTask(task));

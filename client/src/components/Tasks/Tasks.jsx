@@ -4,7 +4,13 @@ import TaskItem from './TaskItem';
 import { taskSchema } from '../../schemas';
 import './Tasks.css';
 
-const Tasks = ({ tasks, onDelete, onTaskToggle, onArchiveClick }) => (
+const Tasks = ({
+  tasks,
+  onDelete,
+  onTaskToggle,
+  onArchiveClick,
+  onDatePick
+}) => (
   <div className="Tasks-container">
     <ul>
       {tasks.map(task => (
@@ -14,6 +20,9 @@ const Tasks = ({ tasks, onDelete, onTaskToggle, onArchiveClick }) => (
           {...task}
           onTaskToggle={onTaskToggle}
           onArchiveClick={onArchiveClick}
+          onDatePick={date => {
+            onDatePick({ id: task.id, finishDate: date.toISOString() });
+          }}
         />
       ))}
     </ul>
@@ -24,6 +33,7 @@ Tasks.propTypes = {
   tasks: PropTypes.arrayOf(PropTypes.shape(taskSchema)).isRequired,
   onDelete: PropTypes.func.isRequired,
   onArchiveClick: PropTypes.func.isRequired,
+  onDatePick: PropTypes.func.isRequired,
   onTaskToggle: PropTypes.func.isRequired
 };
 

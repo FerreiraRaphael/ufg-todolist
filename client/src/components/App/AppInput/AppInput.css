@@ -5,6 +5,7 @@
   align-items: center;
   background-color: #f5f1ee;
   border-left: 1px solid rgba(0, 0, 0, 0.08);
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
   position: relative;
 }
 
@@ -30,7 +31,7 @@
   outline: none;
 }
 
-.AppInput-controls{
+.AppInput-controls {
   width: 40px;
-  transition: all .24s ease;
+  transition: all 0.24s ease;
 }
