@@ -1,0 +1,10 @@
+.Activities-container{
+  flex: 1;
+  background: white;
+  overflow: auto;
+}
+
+.Activities-container > ul{
+  list-style: none;
+  padding: 0;
+}

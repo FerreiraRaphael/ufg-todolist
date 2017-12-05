@@ -34,6 +34,7 @@ class TasksContainer extends React.Component {
         loading={fetching}
         onDelete={deleteTask}
         onTaskToggle={editTask}
+        onArchiveClick={editTask}
       />
     );
   }

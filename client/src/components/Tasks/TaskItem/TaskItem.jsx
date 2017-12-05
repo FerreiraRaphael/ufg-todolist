@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import cs from 'classnames';
 import { taskSchema } from '../../../schemas';
 import MoreOptions from '../../MoreOptions';
+import ArchiveButton from '../../ArchiveButton';
 import TaskItemInput from './TaskItemInput';
 import './TaskItem.css';
 
@@ -21,7 +22,9 @@ class TaskItem extends React.Component {
       done,
       onDelete,
       onTaskToggle,
-      editTask
+      editTask,
+      archived,
+      onArchiveClick
     } = this.props;
     const { value, editing } = this.state;
     return (
@@ -52,7 +55,7 @@ class TaskItem extends React.Component {
           </div>
         )}
         {editing ? (
-          <div style={{ width: 100, display: 'flex' }}>
+          <div style={{ display: 'flex' }}>
             <div className="MoreOptions-container">
               <div
                 role="button"
@@ -68,6 +71,7 @@ class TaskItem extends React.Component {
                   }
                 }}
                 className="rounded-circle MoreOptions-menu"
+                styles={{ margin: 0 }}
               >
                 <i className="material-icons">check</i>
               </div>
@@ -85,13 +89,22 @@ class TaskItem extends React.Component {
               }}
               className="MoreOptions-container"
             >
-              <div className="rounded-circle MoreOptions-menu">
+              <div
+                className="rounded-circle MoreOptions-menu"
+                styles={{ margin: 0 }}
+              >
                 <i className="material-icons">close</i>
               </div>
             </div>
           </div>
         ) : (
           <div className="TaskItem-controls">
+            <ArchiveButton
+              onClick={() => {
+                onArchiveClick({ id, archived: !archived });
+              }}
+              archived={archived}
+            />
             <MoreOptions icon="keyboard_arrow_down">
               <a
                 role="button"
@@ -132,6 +145,7 @@ TaskItem.propTypes = {
   selected: PropTypes.bool,
   editTask: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
+  onArchiveClick: PropTypes.func.isRequired,
   onTaskToggle: PropTypes.func.isRequired
 };
 
