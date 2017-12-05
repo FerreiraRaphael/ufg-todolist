@@ -3,6 +3,7 @@
   width: 100%;
   text-align: center;
   border-left: 1px solid rgba(0, 0, 0, 0.12);
+  flex: 1;
 }
 
 .DontHaveLists-container > .AppMainHeader-container {
@@ -12,11 +13,11 @@
 .DontHaveLists-container > i {
   font-size: 120px;
   margin: 25px auto;
-  color: #2196F3;
+  color: #2196f3;
 }
 
 .DontHaveLists-container > p {
   font-size: 20px;
   margin-bottom: 25px;
-  color: #2196F3;
+  color: #2196f3;
 }
