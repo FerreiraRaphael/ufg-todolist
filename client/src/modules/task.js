@@ -242,14 +242,14 @@ export const fetchTasks = listId => (dispatch, getState) =>
     try {
       const userId = getState().auth.user.id;
       const response = await GET({
-        url: `/api/user/${userId}/list/${listId}`,
+        url: `/api/user/${userId}/list/${listId}/task`,
         auth: {
           token: localStorage.token,
           userid: localStorage.userid
         }
       });
       const result = await response.json();
-      dispatch(fetchingSuccess(result ? result.Tasks : []));
+      dispatch(fetchingSuccess(result));
       resolve(response);
     } catch (e) {
       dispatch(fetchingError(e));
