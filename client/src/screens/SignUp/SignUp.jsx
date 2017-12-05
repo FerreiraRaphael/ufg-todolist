@@ -31,7 +31,7 @@ const SignUpScreen = () => (
       </p>
       <p>
         A documentação da API pode ser encontrada{' '}
-        <a href="/https://app.swaggerhub.com/apis/FerreiraRaphael/ufg-todolist/1.0.0">
+        <a href="https://app.swaggerhub.com/apis/FerreiraRaphael/ufg-todolist/1.0.0">
           aqui
         </a>
       </p>
