@@ -4,6 +4,9 @@ export {
 } from './LeftSideBar/LeftSideBarHeader/LeftSideBarHeader';
 export { default as AppPanel } from './AppPanel/AppPanel';
 export { default as RightSideBar } from './RightSideBar/RightSideBar';
+export {
+  default as RightSideBarHeader
+} from './RightSideBar/RightSideBarHeader/RightSideBarHeader';
 export { default as AppMain } from './AppMain/AppMain';
 export {
   default as AppMainHeader

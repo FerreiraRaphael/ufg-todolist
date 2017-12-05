@@ -1,6 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
   const List = sequelize.define('List', {
-    title: DataTypes.STRING
+    title: DataTypes.STRING,
+    archived: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   });
 
   List.associate = ({ User, Task }) => {

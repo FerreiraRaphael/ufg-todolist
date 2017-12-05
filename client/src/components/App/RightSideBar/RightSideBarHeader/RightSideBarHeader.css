@@ -1,0 +1,15 @@
+.RightSideBarHeader-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  background-color: #eee;
+}
+
+.RightSideBarHeader-close {
+  margin: 0 25px;
+}
+
+.RightSideBarHeader-update {
+  margin: 0 25px;
+}

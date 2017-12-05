@@ -20,13 +20,14 @@ class ListsContainer extends React.Component {
   }
 
   render() {
-    const { lists, fetching, selectedList, deleteList } = this.props;
+    const { lists, fetching, selectedList, deleteList, editList } = this.props;
     return (
       <Lists
         lists={lists}
         loading={fetching}
         selectedList={selectedList}
         onDelete={deleteList}
+        onArchiveClick={editList}
       />
     );
   }
@@ -47,7 +48,8 @@ ListsContainer.propTypes = {
   lists: PropTypes.arrayOf(PropTypes.shape(listSchema)).isRequired,
   history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   location: PropTypes.object.isRequired, // eslint-disable-line
-  deleteList: PropTypes.func.isRequired
+  deleteList: PropTypes.func.isRequired,
+  editList: PropTypes.func.isRequired
 };
 
 export default ListsContainer;

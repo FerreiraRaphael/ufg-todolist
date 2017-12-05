@@ -16,6 +16,9 @@
 .TaskItem-container.selected {
   background-color: #e9ebeb;
 }
+.TaskItem-container .MoreOptions-menu {
+  margin: 0;
+}
 .TaskItem-input {
   width: 30px;
   height: 30px;
@@ -35,7 +38,8 @@
   color: black;
 }
 .TaskItem-controls {
-  width: 40px;
+  display: flex;
+  align-items: center;
 }
 .TaskItem-task-number {
   position: absolute;

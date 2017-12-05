@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import cs from 'classnames';
 import { listSchema } from '../../../schemas';
 import MoreOptions from '../../MoreOptions';
+import ArchiveButton from '../../ArchiveButton';
 import './ListItem.css';
 
 class ListItem extends React.Component {
@@ -19,7 +20,9 @@ class ListItem extends React.Component {
       id,
       selected,
       onDelete,
+      archived,
       collapseLeftSideBar,
+      onArchiveClick,
       history,
       editList
     } = this.props;
@@ -60,7 +63,7 @@ class ListItem extends React.Component {
         )}
 
         {editing ? (
-          <div style={{ width: 100, display: 'flex' }}>
+          <div style={{ display: 'flex' }}>
             <div className="MoreOptions-container">
               <div
                 role="button"
@@ -99,6 +102,12 @@ class ListItem extends React.Component {
           </div>
         ) : (
           <div className="ListItem-controls">
+            <ArchiveButton
+              onClick={() => {
+                onArchiveClick({ id, archived: !archived });
+              }}
+              archived={archived}
+            />
             <MoreOptions icon="keyboard_arrow_down">
               <a
                 role="button"
@@ -139,6 +148,7 @@ ListItem.propTypes = {
   selected: PropTypes.bool,
   editList: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
+  onArchiveClick: PropTypes.func.isRequired,
   collapseLeftSideBar: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired // eslint-disable-line react/forbid-prop-types
 };
