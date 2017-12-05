@@ -1,0 +1,24 @@
+.react-datepicker {
+  display: flex;
+  height: 400px !important;
+}
+
+.react-datepicker__month-container {
+  flex: 1;
+}
+
+.react-datepicker__time-container {
+  width: 75px;
+}
+
+.react-datepicker__time {
+  height: calc(100% - 55px) !important;
+}
+
+.react-datepicker__time-box,
+.react-datepicker__time-list {
+  height: 100% !important;
+}
+.react-datepicker__time-list {
+  padding: 0px !important;
+}

@@ -13,6 +13,8 @@ import {
 import DontHaveLists from '../../components/DontHaveLists';
 import ListsContainer from '../../containers/ListsContainer';
 import ActivitiesContainer from '../../containers/ActivitiesContainer';
+import FilterTasks from '../../containers/FilterTasks';
+import FilterLists from '../../containers/FilterLists';
 import TasksContainer from '../../containers/TasksContainer';
 import ListInput from '../../containers/ListInput';
 import TaskInput from '../../containers/TaskInput';
@@ -34,6 +36,7 @@ const AppScreen = ({
   <AppPanel>
     <LeftSideBar open={leftSideBar}>
       <LeftSideBarHeader username={user.username} onSignOutClick={logout} />
+      <FilterLists />
       <ListsContainer />
       <ListInput />
     </LeftSideBar>
@@ -49,6 +52,7 @@ const AppScreen = ({
             toggleRightBar();
           }}
         />
+        <FilterTasks />
         <Route path="/app/list/:listId" component={TasksContainer} />
         <TaskInput />
       </AppMain>

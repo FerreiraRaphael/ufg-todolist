@@ -1,0 +1,4 @@
+{
+  "plugins": ["node_modules/jsdoc-react-proptypes/lib/plugin"],
+  "template": "node_modules/docdash"
+}

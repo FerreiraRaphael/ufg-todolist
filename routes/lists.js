@@ -10,8 +10,7 @@ router
     isCurrentUserMiddlaware,
     async function fetchLists(req, res) {
       const lists = await List.findAll({
-        where: { ...req.params },
-        include: [Task]
+        where: { ...req.params }
       });
       res.json(lists);
     }

@@ -24,10 +24,18 @@ if (process.env.NODE_ENV !== 'test') {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use('/', express.static(path.join(__dirname, 'client/build')));
+app.use('/docs', express.static(path.join(__dirname, 'docs')));
 
 app.use('/api', routes);
-// app.use('/users', users);
+
+app.get('/docs', (req, res) => {
+  res.sendFile(path.join(`${__dirname}/docs/index.html`));
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(`${__dirname}/client/build/index.html`));
+});
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -54,7 +62,8 @@ passport.use(
       const { lastLogout } = await User.find({ where: { id } });
       const user = await jwt.verify(
         token,
-        `${process.env.APP_SECRET || 'development'} ${id} ${lastLogout.getTime()}`
+        `${process.env.APP_SECRET ||
+          'development'} ${id} ${lastLogout.getTime()}`
       );
       if (!user) {
         return done(null, { error: 'Não foi possível autenticar' });

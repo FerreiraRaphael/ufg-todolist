@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Tasks } from '../../components/Tasks';
 import { taskSchema, listSchema } from '../../schemas';
+import { filters } from '../../lib/helpers';
 
 class TasksContainer extends React.Component {
   async componentDidMount() {
@@ -27,14 +28,15 @@ class TasksContainer extends React.Component {
   }
 
   render() {
-    const { tasks, fetching, deleteTask, editTask } = this.props;
+    const { tasks, fetching, deleteTask, editTask, filter } = this.props;
     return (
       <Tasks
-        tasks={tasks}
+        tasks={tasks.filter(filters[filter])}
         loading={fetching}
         onDelete={deleteTask}
         onTaskToggle={editTask}
         onArchiveClick={editTask}
+        onDatePick={editTask}
       />
     );
   }
@@ -54,6 +56,7 @@ TasksContainer.propTypes = {
   selectList: PropTypes.func.isRequired,
   deleteTask: PropTypes.func.isRequired,
   editTask: PropTypes.func.isRequired,
+  filter: PropTypes.string.isRequired,
   selectedList: PropTypes.shape(listSchema),
   tasks: PropTypes.arrayOf(PropTypes.shape(taskSchema)).isRequired,
   match: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
