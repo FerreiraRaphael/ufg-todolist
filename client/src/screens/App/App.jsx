@@ -57,7 +57,13 @@ const AppScreen = ({
         <TaskInput />
       </AppMain>
     ) : (
-      <div>
+      <div
+        style={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column'
+        }}
+      >
         <AppMainHeader
           label="Crie uma lista"
           onLeftControlClick={toggleLeftBar}
