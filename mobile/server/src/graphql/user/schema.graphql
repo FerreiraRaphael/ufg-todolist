@@ -1,0 +1,11 @@
+directive @loggedIn on QUERY | MUTATION | FIELD_DEFINITION
+
+type User {
+  id: ID!
+  name: String
+}
+
+type Query {
+  users: [User]!
+  me: User @loggedIn
+}
