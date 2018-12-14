@@ -1,8 +1,0 @@
-#!/bin/bash
-set -e
-pushd $(dirname $0)/.. >/dev/null
-
-export COMPOSE_PROJECT_NAME='Todo'
-
-docker-compose build
-docker-compose up $@
